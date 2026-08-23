@@ -1,0 +1,10 @@
+name = "digital_bringup"
+setup = []
+tests = [
+  "../digital/gpio/test_output_high.py",
+  "../digital/gpio/test_output_low.py",
+  "../digital/gpio/test_loopback_pattern.py",
+  "../digital/ethernet/test_link_up.py",
+]
+teardown = []
+# fail_fast = true

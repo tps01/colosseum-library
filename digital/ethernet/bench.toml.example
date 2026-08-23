@@ -1,0 +1,9 @@
+[[messaging.ssh]]
+ssh_id = 1
+host = "192.168.1.10"
+username = "root"
+password = "changeme"
+
+[[messaging.http]]
+http_id = 1
+base_url = "http://192.168.1.10"

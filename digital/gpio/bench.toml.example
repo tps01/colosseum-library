@@ -1,0 +1,10 @@
+[[io.dio]]
+dio_id = 1
+driver = sim
+port_lines = 8
+direction = 0xFF
+
+[[equipment.oscope]]
+oscope_id = 1
+driver = sim
+resource = SIM::SCOPE1

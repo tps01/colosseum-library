@@ -1,0 +1,10 @@
+name = "power_dynamic"
+setup = []
+tests = [
+  "../power/eload/test_rail_voltage_under_load.py",
+  "../power/transient/test_overshoot_mv.py",
+  "../power/transient/test_undershoot_mv.py",
+  "../power/transient/test_settle_time_ms.py",
+]
+teardown = []
+# fail_fast = true

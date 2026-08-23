@@ -1,0 +1,4 @@
+[[equipment.psu]]
+psu_id = 1
+driver = sim
+resource = SIM::PSU1

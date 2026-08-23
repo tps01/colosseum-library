@@ -1,0 +1,12 @@
+name = "rf_amplifier"
+setup = []
+tests = [
+  "../rf/frequency/test_peak_frequency.py",
+  "../rf/harmonics/test_fundamental_power.py",
+  "../rf/harmonics/test_h2_dbc.py",
+  "../rf/insertion_loss/test_s21_max_db.py",
+  "../rf/return_loss/test_s11_max_db.py",
+  "../rf/power_meter/test_avg_power_dbm.py",
+]
+teardown = []
+# fail_fast = true

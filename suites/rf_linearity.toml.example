@@ -1,0 +1,9 @@
+name = "rf_linearity"
+setup = []
+tests = [
+  "../rf/p1db/test_p1db_compression_dbm.py",
+  "../rf/ip2_ip3/test_im3_product_power.py",
+  "../rf/ip2_ip3/test_oip3_dbm.py",
+]
+teardown = []
+# fail_fast = true

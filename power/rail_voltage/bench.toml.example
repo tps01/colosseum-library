@@ -1,0 +1,18 @@
+# Copy to bench.toml next to the test script when USE_AUTOCONFIG = False.
+# Or run autoconfig once with export_path and copy the discovered IDs into FILL_IN_HERE.
+
+[[equipment.psu]]
+psu_id = 1
+driver = visa
+resource = "USB0::0x1234::0x5678::INSTR"
+model = generic
+voltage = 3.3
+ovp = 3.6
+ocp = 1.0
+
+[[equipment.dmm]]
+dmm_id = 1
+driver = visa
+resource = "USB0::0x2A8D::0x8F01::INSTR"
+model = generic
+timeout = 5.0

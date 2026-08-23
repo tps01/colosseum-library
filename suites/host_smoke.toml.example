@@ -1,0 +1,5 @@
+name = "host_smoke"
+setup = []
+tests = ["../host/bench_prerequisites/test_bench_prerequisites.py"]
+teardown = []
+# fail_fast = true

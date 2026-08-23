@@ -1,0 +1,9 @@
+name = "rf_passband"
+setup = []
+tests = [
+  "../rf/insertion_loss/test_s21_max_db.py",
+  "../rf/return_loss/test_s11_max_db.py",
+  "../rf/gain_flatness/test_gain_flatness_db.py",
+]
+teardown = []
+# fail_fast = true

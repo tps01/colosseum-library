@@ -1,0 +1,5 @@
+name = "power_acceptance"
+setup = []
+tests = ["../power/rail_voltage/test_rail_voltage.py"]
+teardown = []
+# fail_fast = true

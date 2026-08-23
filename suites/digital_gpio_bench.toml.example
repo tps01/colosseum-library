@@ -1,0 +1,9 @@
+name = "digital_gpio_bench"
+setup = []
+tests = [
+  "../digital/gpio/test_output_high.py",
+  "../digital/gpio/test_output_low.py",
+  "../digital/gpio/test_rise_time.py",
+]
+teardown = []
+# fail_fast = true
