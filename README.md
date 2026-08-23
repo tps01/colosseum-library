@@ -44,7 +44,7 @@ cannot silently measure the wrong thing.
 | `rf/` | 22 atomic RF blocks (VNA, SA, pwrmeter, trace analysis) |
 | `power/` | 6 atomic blocks (rail, transient, eload) |
 | `host/` | Bench-PC prerequisites and telemetry |
-| `gui/` | Reserved for future UI automation |
+| `gui/` | Product UI automation (`col.gui.web` / `col.gui.desktop`) |
 | `suites/` | Suite TOML templates that compose building blocks |
 
 Each **topic folder** is self-contained: shared `bench.toml.example`, `README.md`
@@ -97,3 +97,12 @@ scripts call TDD APIs not yet implemented in plugins; equipment rises to meet th
 - **rf** — `colosseum-equipment`, `colosseum-shared` (trace analysis TDD)
 - **power** — `colosseum-equipment`, `colosseum-shared`
 - **host** — `colosseum-host`
+- **gui** — `colosseum-gui` (`pip install colosseum-gui`; includes web + desktop drivers)
+
+## Library Ground Rules
+
+- The library does not need CI/CD
+- The library does not need test scripts/ unit tests (though tests from the library are valid as e2e tests themselves)
+- The library does not need versioning or gitflow, though a simple develop -> main mechanism is fine.
+- Tests in the library should be portable. An inexperienced user should have to do minimal coding to get a test working. (i.e. autoconfig + a correct physical hardware setup should handle most complexity)
+- Library tests may use libraries outside colosseum to accomplish certain tasks, when necessary. Colosseum is built on python for this reason- one framework cannot possibly cover every use-case or test flow.

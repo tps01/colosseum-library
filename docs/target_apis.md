@@ -99,6 +99,22 @@ Eload engage/disengage/set_current: TDD (referenced by transient and eload block
 Generic `verify_field`, `verify_measurement_exists` used across the catalog when
 no dedicated instrument verifier exists.
 
+## `col.gui.web` / `col.gui.desktop` (colosseum-gui) — **exists** (sim + adapters)
+
+Web and desktop are separate kinds. Drivers: web `sim`|`playwright`; desktop
+`sim`|`generic`|`pywinauto` (Windows-only for pywinauto). Generic commands are
+best-effort; tree locators raise `GuiCapabilityError` on the wrong driver.
+
+| API | Status | Used by |
+|-----|--------|---------|
+| `col.gui.web.click` / `verify_visible` / `verify_text` | **exists** | `gui/web/button_visible` |
+| `col.gui.web.capture_screenshot` / `verify_visual` | **exists** | `gui/web/screenshot_match` |
+| `col.gui.web.measure_contrast_ratio` / `verify_contrast` | **exists** | `gui/web/contrast_ratio` |
+| `col.gui.web.navigate` / `measure_navigation_ms` | **exists** | `gui/web/navigation_ms` |
+| `col.gui.desktop.click(image=)` | **exists** | `gui/desktop/image_click` |
+| `col.gui.desktop.click(automation_id=)` / `verify_text` | **exists** | `gui/desktop/uia_click` |
+| `col.gui.desktop.capture_screenshot` / `verify_visual` | **exists** | `gui/desktop/screenshot_match` |
+
 ## Runnable today (Phase 2 priority)
 
 Scripts that can run with current equipment after filling `FILL_IN_HERE`:

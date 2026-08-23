@@ -1,19 +1,36 @@
 # GUI
 
-Reserved for product UI automation (Selenium / XPath-style drivers) once a
-`colosseum-gui` (or equivalent) plugin exists.
+Product UI automation via `colosseum-gui` (`col.gui.web` / `col.gui.desktop`).
+
+Web and desktop are **separate kinds** (like `speca` vs `oscope`). Drivers implement
+each kind; generic commands are best-effort.
 
 ## Plugins
 
 | Plugin | Used for |
 |--------|----------|
-| *(none yet)* | Do not add Selenium or browser drivers to this catalog yet |
+| `colosseum-gui` | `col.gui.web.*`, `col.gui.desktop.*` |
+| `colosseum-core` | Runner / evidence |
+
+`pip install colosseum-gui` includes Playwright, desktop drivers (pywinauto on
+Windows; python-xlib + mss for generic/X11 on Linux), and test tooling.
+Then run `playwright install chromium` for browser binaries.
 
 ## Catalog
 
-| Test | Status | Notes |
-|------|--------|-------|
-| *(none)* | Reserved | Add tests only after a first-party GUI adaptation layer lands |
+| Folder | Kind | Typical driver |
+|--------|------|----------------|
+| [web/](web/) | Browser / Electron renderer | `playwright` (or `sim`) |
+| [desktop/](desktop/) | Native window | `generic` (image/coords) or `pywinauto` (Windows UIA) |
 
-Until then, keep this domain empty aside from this README so the folder layout
-stays stable.
+## Platform notes
+
+| Driver | Linux | Windows |
+|--------|-------|---------|
+| `sim` | yes | yes |
+| `playwright` | yes | yes |
+| `generic` / `x11` | yes (needs `$DISPLAY`) | yes (SendInput) |
+| `pywinauto` | **no** (fails at connect) | yes |
+
+X11-forwarded apps: use `col.gui.desktop` with `driver=generic` and image/coords.
+Accessibility trees are **not** forwarded over `ssh -X`.

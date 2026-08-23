@@ -1,0 +1,4 @@
+[[gui.desktop]]
+desktop_id = 1
+driver = "sim"
+title = "SimWindow"
