@@ -1,0 +1,8 @@
+[[gui.desktop]]
+desktop_id = 1
+driver = "sim"
+title = "SimWindow"
+# Real Windows DUT:
+# driver = "pywinauto"
+# title = "Radio Control"
+# exe = "C:/path/to/app.exe"
