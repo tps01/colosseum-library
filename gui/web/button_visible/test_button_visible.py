@@ -9,7 +9,7 @@ Drivers:
 
 Run (after copy-out and filling FILL_IN_HERE)::
 
-    colosseum run test_button_visible.py --config bench.toml
+    colosseum run test_button_visible.py --config config.toml
 """
 
 from __future__ import annotations
@@ -32,7 +32,7 @@ status_name = FILL_IN_HERE  # str; e.g. "Running"
 def _load_bench() -> None:
     if col.config.is_loaded():
         return
-    col.config.load_config(str(Path(__file__).with_name("bench.toml")))
+    col.config.load_config(str(Path(__file__).with_name("config.toml")))
 
 
 def main() -> None:

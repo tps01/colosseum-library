@@ -12,7 +12,7 @@ Instruments (example):
 Run (after copy-out and filling FILL_IN_HERE)::
 
     colosseum run test.py
-    colosseum run test.py --config bench.toml
+    colosseum run test.py --config config.toml
 """
 
 from __future__ import annotations
@@ -22,10 +22,10 @@ from pathlib import Path
 import colosseum as col
 
 # --- bench wiring ---
-USE_AUTOCONFIG = True  # False: load sibling bench.toml (copy from bench.toml.example)
+USE_AUTOCONFIG = True  # False: load sibling config.toml (copy from config.toml.example)
 
 # --- procedure (replace every FILL_IN_HERE) ---
-example_id = FILL_IN_HERE  # int; instrument id from autoconfig export or bench.toml
+example_id = FILL_IN_HERE  # int; instrument id from autoconfig export or config.toml
 example_limit = FILL_IN_HERE  # float; units depend on the check
 
 
@@ -34,9 +34,9 @@ def _load_bench() -> None:
         return
     if USE_AUTOCONFIG:
         col.equipment.autoconfig()
-        # Optional: col.equipment.autoconfig(export_path="bench.toml")
+        # Optional: col.equipment.autoconfig(export_path="config.toml")
         return
-    col.config.load_config(str(Path(__file__).with_name("bench.toml")))
+    col.config.load_config(str(Path(__file__).with_name("config.toml")))
 
 
 def main() -> None:

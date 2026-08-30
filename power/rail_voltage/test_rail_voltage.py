@@ -11,7 +11,7 @@ Instruments:
 Run (after copy-out and filling FILL_IN_HERE)::
 
     colosseum run test_rail_voltage.py
-    colosseum run test_rail_voltage.py --config bench.toml
+    colosseum run test_rail_voltage.py --config config.toml
 """
 
 from __future__ import annotations
@@ -21,10 +21,10 @@ from pathlib import Path
 import colosseum as col
 
 # --- bench wiring ---
-USE_AUTOCONFIG = True  # False: load sibling bench.toml (copy from bench.toml.example)
+USE_AUTOCONFIG = True  # False: load sibling config.toml (copy from config.toml.example)
 
 # --- procedure (replace every FILL_IN_HERE) ---
-psu_id = FILL_IN_HERE  # int; [[equipment.psu]] id from autoconfig or bench.toml
+psu_id = FILL_IN_HERE  # int; [[equipment.psu]] id from autoconfig or config.toml
 dmm_id = FILL_IN_HERE  # int; [[equipment.dmm]] id
 dmm_channel = FILL_IN_HERE  # int; DMM input channel
 set_voltage_v = FILL_IN_HERE  # V; PSU setpoint
@@ -38,9 +38,9 @@ def _load_bench() -> None:
         return
     if USE_AUTOCONFIG:
         col.equipment.autoconfig()
-        # Optional: col.equipment.autoconfig(export_path="bench.toml")
+        # Optional: col.equipment.autoconfig(export_path="config.toml")
         return
-    col.config.load_config(str(Path(__file__).with_name("bench.toml")))
+    col.config.load_config(str(Path(__file__).with_name("config.toml")))
 
 
 def main() -> None:

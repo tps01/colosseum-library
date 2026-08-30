@@ -10,7 +10,7 @@ Drivers:
 
 Run::
 
-    colosseum run test_uia_click.py --config bench.toml
+    colosseum run test_uia_click.py --config config.toml
 """
 
 from __future__ import annotations
@@ -29,7 +29,7 @@ expected_text = FILL_IN_HERE  # str; text after click
 def _load_bench() -> None:
     if col.config.is_loaded():
         return
-    col.config.load_config(str(Path(__file__).with_name("bench.toml")))
+    col.config.load_config(str(Path(__file__).with_name("config.toml")))
 
 
 def main() -> None:

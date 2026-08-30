@@ -36,7 +36,7 @@ def _load_bench() -> None:
     if USE_AUTOCONFIG:
         col.equipment.autoconfig()
         return
-    col.config.load_config(str(Path(__file__).with_name("bench.toml")))
+    col.config.load_config(str(Path(__file__).with_name("config.toml")))
 
 
 if __name__ == "__main__":

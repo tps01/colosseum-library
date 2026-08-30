@@ -11,9 +11,9 @@ user's project copy.
 1. Module docstring: purpose, required plugins, instruments, how to run.
 2. Top-of-file procedure block with `FILL_IN_HERE` and unit comments.
 3. `_load_bench()` that respects `col.config.is_loaded()`, `USE_AUTOCONFIG`, and
-   a sibling `bench.toml`.
+   a sibling `config.toml`.
 4. `def main():` with one `col.*` call per line (keyword args).
 5. `if __name__ == "__main__": main(); col.endex()`.
-6. Optional `bench.toml.example` using real plugin section names only
+6. Optional `config.toml.example` using real plugin section names only
    (`[[equipment.*]]`, `[[io.dio]]`, … — never `[library.*]`).
 7. Short `README.md` in the test folder listing FILL_IN_HERE keys and plugins.

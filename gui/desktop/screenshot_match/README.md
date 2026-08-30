@@ -3,7 +3,7 @@
 ## FILL_IN_HERE
 
 | Name | Meaning |
-|------|---------|
+| --- | --- |
 | `desktop_id` | `[[gui.desktop]]` id |
 | `screenshot_path` | Run-relative capture |
 | `baseline_path` | Golden PNG |
