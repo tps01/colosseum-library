@@ -22,6 +22,6 @@ See [docs/target_apis.md](../docs/target_apis.md) for TDD specifications.
 ### Suite examples
 
 - [suites/power_acceptance.toml.example](../suites/power_acceptance.toml.example)
-  — steady rail check
-- [suites/power_dynamic.toml.example](../suites/power_dynamic.toml.example) —
+  - steady rail check
+- [suites/power_dynamic.toml.example](../suites/power_dynamic.toml.example) -
   load step + transient

@@ -33,6 +33,6 @@ See [docs/target_apis.md](../docs/target_apis.md) for TDD specifications.
 ### Suite examples
 
 - [suites/digital_gpio_bench.toml.example](../suites/digital_gpio_bench.toml.example)
-  — GPIO output and timing
+  - GPIO output and timing
 - [suites/digital_bringup.toml.example](../suites/digital_bringup.toml.example)
-  — broader digital smoke
+  - broader digital smoke

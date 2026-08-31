@@ -35,9 +35,9 @@ See [docs/target_apis.md](../docs/target_apis.md) for TDD specifications and the
 
 ### Suite examples
 
-- [suites/rf_passband.toml.example](../suites/rf_passband.toml.example) — S21,
+- [suites/rf_passband.toml.example](../suites/rf_passband.toml.example) - S21,
   S11, gain flatness
-- [suites/rf_linearity.toml.example](../suites/rf_linearity.toml.example) —
+- [suites/rf_linearity.toml.example](../suites/rf_linearity.toml.example) -
   P1dB, IM3, OIP3
-- [suites/rf_amplifier.toml.example](../suites/rf_amplifier.toml.example) —
+- [suites/rf_amplifier.toml.example](../suites/rf_amplifier.toml.example) -
   broader RF acceptance
