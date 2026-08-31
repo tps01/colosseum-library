@@ -6,7 +6,7 @@ Required plugins:
 
 Run::
 
-    colosseum run test_screenshot_match.py --config bench.toml
+    colosseum run test_screenshot_match.py --config config.toml
 """
 
 from __future__ import annotations
@@ -26,7 +26,7 @@ max_diff_ratio = FILL_IN_HERE  # float
 def _load_bench() -> None:
     if col.config.is_loaded():
         return
-    col.config.load_config(str(Path(__file__).with_name("bench.toml")))
+    col.config.load_config(str(Path(__file__).with_name("config.toml")))
 
 
 def main() -> None:

@@ -6,7 +6,7 @@ Required plugins:
 
 Run::
 
-    colosseum run test_contrast_ratio.py --config bench.toml
+    colosseum run test_contrast_ratio.py --config config.toml
 """
 
 from __future__ import annotations
@@ -33,7 +33,7 @@ min_contrast = FILL_IN_HERE  # float; e.g. 4.5
 def _load_bench() -> None:
     if col.config.is_loaded():
         return
-    col.config.load_config(str(Path(__file__).with_name("bench.toml")))
+    col.config.load_config(str(Path(__file__).with_name("config.toml")))
 
 
 def main() -> None:

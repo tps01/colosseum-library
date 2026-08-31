@@ -7,18 +7,18 @@ with** the test folders it lists. Suite paths are relative to the suite file.
 
 ```sh
 # Config already loaded by suite CLI, or by each test's _load_bench / autoconfig:
-colosseum run-suite power_acceptance.toml --config bench.toml
-colosseum run-suite rf_passband.toml --config bench.toml
+colosseum run-suite power_acceptance.toml --config config.toml
+colosseum run-suite rf_passband.toml --config config.toml
 ```
 
 When every test uses `USE_AUTOCONFIG = True` and VISA gear only, `--config` may
-be omitted if the first script calls autoconfig. Prefer an explicit bench TOML
+be omitted if the first script calls autoconfig. Prefer an explicit config TOML
 for mixed suites (DIO + host + instruments).
 
 ## Templates
 
 | File | Blocks composed |
-|------|-----------------|
+| --- | --- |
 | `host_smoke.toml.example` | `host/bench_prerequisites` |
 | `power_acceptance.toml.example` | `power/rail_voltage` |
 | `power_dynamic.toml.example` | eload + transient (4 blocks) |

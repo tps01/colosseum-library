@@ -14,7 +14,7 @@ def _load_bench() -> None:
     if USE_AUTOCONFIG:
         col.equipment.autoconfig()
         return
-    col.config.load_config(str(Path(__file__).with_name("bench.toml")))
+    col.config.load_config(str(Path(__file__).with_name("config.toml")))
 """
 
 FOOTER = """
@@ -50,7 +50,7 @@ def folder_readme(folder: Path, title: str, intro: str, rows: list[tuple[str, st
 
 def bench(folder: Path, text: str) -> None:
     folder.mkdir(parents=True, exist_ok=True)
-    (folder / "bench.toml.example").write_text(text.strip() + "\n", encoding="utf-8")
+    (folder / "config.toml.example").write_text(text.strip() + "\n", encoding="utf-8")
 
 
 def topic(folder: Path, bench_text: str, title: str, intro: str, tests: list[dict]) -> None:

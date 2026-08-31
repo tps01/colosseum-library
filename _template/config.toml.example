@@ -1,4 +1,4 @@
-# Copy to bench.toml next to the test script when USE_AUTOCONFIG = False.
+# Copy to config.toml next to the test script when USE_AUTOCONFIG = False.
 # Use only plugin-registered sections. Adjust resources and IDs for your bench.
 
 # [[equipment.psu]]

@@ -5,7 +5,7 @@
 ## Building blocks
 
 | Script | Block |
-|--------|-------|
+| --- | --- |
 | `test_rom_read.py` | ROM read → match |
 | `test_scratchpad_crc.py` | scratchpad CRC → match |
 | `test_parasitic_power.py` | parasitic read → valid byte |

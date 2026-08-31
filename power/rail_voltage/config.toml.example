@@ -1,4 +1,4 @@
-# Copy to bench.toml next to the test script when USE_AUTOCONFIG = False.
+# Copy to config.toml next to the test script when USE_AUTOCONFIG = False.
 # Or run autoconfig once with export_path and copy the discovered IDs into FILL_IN_HERE.
 
 [[equipment.psu]]

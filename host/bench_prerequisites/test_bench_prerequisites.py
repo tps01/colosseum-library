@@ -9,7 +9,7 @@ Instruments:
 
 Run (after copy-out and filling FILL_IN_HERE)::
 
-    colosseum run test_bench_prerequisites.py --config bench.toml
+    colosseum run test_bench_prerequisites.py --config config.toml
 """
 
 from __future__ import annotations
@@ -34,7 +34,7 @@ def _load_bench() -> None:
     if USE_AUTOCONFIG:
         col.equipment.autoconfig()
         return
-    col.config.load_config(str(Path(__file__).with_name("bench.toml")))
+    col.config.load_config(str(Path(__file__).with_name("config.toml")))
 
 
 def main() -> None:

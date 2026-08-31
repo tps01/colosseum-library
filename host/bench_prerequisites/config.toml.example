@@ -1,4 +1,4 @@
-# Copy to bench.toml next to the test script (USE_AUTOCONFIG is False for host).
+# Copy to config.toml next to the test script (USE_AUTOCONFIG is False for host).
 # Optional thresholds for col.host.config / profile helpers; script limits use FILL_IN_HERE.
 
 [host.profile]

@@ -10,7 +10,7 @@ Check memory, disk, Python version, and optionally VISA on the bench PC.
 ## FILL_IN_HERE
 
 | Name | Meaning |
-|------|---------|
+| --- | --- |
 | `min_memory_mb` | Minimum available memory (MB) |
 | `min_disk_gb` | Minimum free disk (GB) |
 | `python_version_prefix` | Required Python prefix (e.g. `"3.11"`) |
@@ -19,6 +19,7 @@ Check memory, disk, Python version, and optionally VISA on the bench PC.
 ## Run
 
 ```sh
-# Copy bench.toml.example → bench.toml if you need [host.profile]; else a minimal file is fine
-colosseum run test_bench_prerequisites.py --config bench.toml
+# Copy config.toml.example → config.toml if you need [host.profile];
+# else a minimal file is fine
+colosseum run test_bench_prerequisites.py --config config.toml
 ```

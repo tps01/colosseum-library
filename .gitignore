@@ -74,10 +74,10 @@ Desktop.ini
 .env.*
 !.env.example
 
-# Filled bench configs (keep *.toml.example tracked)
-**/bench.toml
-**/bench.local.toml
-**/bench.*.local.toml
+# Filled config files (keep *.toml.example tracked)
+**/config.toml
+**/config.local.toml
+**/config.*.local.toml
 
 # Local notes and agent scratch
 scratchpad/
