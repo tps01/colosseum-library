@@ -15,5 +15,5 @@ user's project copy.
 4. `def main():` with one `col.*` call per line (keyword args).
 5. `if __name__ == "__main__": main(); col.endex()`.
 6. Optional `config.toml.example` using real plugin section names only
-   (`[[equipment.*]]`, `[[io.dio]]`, … — never `[library.*]`).
+   (`[[equipment.*]]`, `[[io.dio]]`, … - never `[library.*]`).
 7. Short `README.md` in the test folder listing FILL_IN_HERE keys and plugins.

@@ -93,7 +93,7 @@ Every catalog script:
 4. Keeps `FILL_IN_HERE` in the committed catalog; wiring goes in `# SETUP:`
   comments.
 
-Suites compose blocks — they do not combine multiple measurements in one script.
+Suites compose blocks - they do not combine multiple measurements in one script.
 
 ## Plugin dependencies by domain
 
@@ -101,12 +101,12 @@ See each domain `README.md` and [docs/target_apis.md](docs/target_apis.md). Many
 scripts call TDD APIs not yet implemented in plugins; equipment rises to meet
 them.
 
-- **digital** — `colosseum-equipment`, `colosseum-shared`, `colosseum-host`,
+- **digital** - `colosseum-equipment`, `colosseum-shared`, `colosseum-host`,
   `colosseum-messaging`
-- **rf** — `colosseum-equipment`, `colosseum-shared` (trace analysis TDD)
-- **power** — `colosseum-equipment`, `colosseum-shared`
-- **host** — `colosseum-host`
-- **gui** — `colosseum-gui` (`pip install colosseum-gui`; includes web + desktop
+- **rf** - `colosseum-equipment`, `colosseum-shared` (trace analysis TDD)
+- **power** - `colosseum-equipment`, `colosseum-shared`
+- **host** - `colosseum-host`
+- **gui** - `colosseum-gui` (`pip install colosseum-gui`; includes web + desktop
   drivers)
 
 ## Library Ground Rules

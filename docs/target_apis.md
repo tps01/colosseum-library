@@ -5,13 +5,13 @@ yet**;
 the library defines the API specification that equipment and shared code must
 grow into. Do
 not
-implement these APIs in `colosseum-library` — they belong in first-party
+implement these APIs in `colosseum-library` - they belong in first-party
 plugins.
 
 Status legend: **exists** (callable today), **TDD** (referenced by catalog, not
 yet shipped).
 
-## `col.shared.signal` (colosseum-shared) — TDD
+## `col.shared.signal` (colosseum-shared) - TDD
 
 Pure trace math and derived RF metrics. Works on CSV traces under the run
 directory
@@ -45,7 +45,7 @@ rename `smoothing_order` → `sg_window_length` + `sg_polyorder`.
 Implement SG in **stdlib-only** shared code unless a compliant numpy/scipy path
 already exists in equipment (see `colosseum-core/RULES.md` license allowlist).
 
-## `col.io.*` (colosseum-equipment) — mostly TDD
+## `col.io.*` (colosseum-equipment) - mostly TDD
 
 | API | Status | Used by |
 | --- | --- | --- |
@@ -55,7 +55,7 @@ already exists in equipment (see `colosseum-core/RULES.md` license allowlist).
 | `col.io.spi.transfer` | TDD | `digital/spi/*` |
 | `col.io.jtag.read_idcode`, `shift_dr` | TDD | `digital/jtag/*` |
 
-## `col.equipment.oscope` — partial TDD
+## `col.equipment.oscope` - partial TDD
 
 | API | Status | Used by |
 | --- | --- | --- |
@@ -69,17 +69,17 @@ already exists in equipment (see `colosseum-core/RULES.md` license allowlist).
 | `measure_eye_height` | TDD | `digital/ethernet/test_eye_height_mv.py` |
 | `measure_... | TDD | `power/transient/*` |
 
-## `col.equipment.freqcounter` — **exists**
+## `col.equipment.freqcounter` - **exists**
 
 Used by `digital/clocks/test_frequency.py`.
 
-## `col.equipment.fs740` — TDD
+## `col.equipment.fs740` - TDD
 
 | API | Used by |
 | --- | --- |
 | `measure_allan(fs740_id, tau_s, duration_s, key)` | `rf/allan... |
 
-## `col.equipment.vsg`, `speca`, `vna`, `pwrmeter` — mostly **exists**
+## `col.equipment.vsg`, `speca`, `vna`, `pwrmeter` - mostly **exists**
 
 Existing marker, sweep, and power APIs cover CW peak frequency, harmonics
 fundamental power, dual-tone blocks, VNA S11/S21 spot markers, and pwrmeter
@@ -87,14 +87,14 @@ avg/peak.
 
 TDD additions on speca side: mask overlay artifact (`save_trace_with_mask`).
 
-## `col.equipment.psu`, `eload` — partial
+## `col.equipment.psu`, `eload` - partial
 
 PSU set/measure/verify: **exists** (`power/rail_voltage`, `power/eload`).
 
 Eload engage/disengage/set_current: TDD (referenced by transient and eload
 blocks).
 
-## `col.host.net`, `col.messaging.ssh`, `col.shared.regex` — partial TDD
+## `col.host.net`, `col.messaging.ssh`, `col.shared.regex` - partial TDD
 
 | API | Used by |
 | --- | --- |
@@ -102,12 +102,12 @@ blocks).
 | SSH stdout + `col.shared.regex.verify_match` | `digital/... |
 | `col.messaging.ssh.measure_stdout` | `digital/... |
 
-## `col.shared.verify` — **exists**
+## `col.shared.verify` - **exists**
 
 Generic `verify_field`, `verify_measurement_exists` used across the catalog when
 no dedicated instrument verifier exists.
 
-## `col.gui.web` / `col.gui.desktop` (colosseum-gui) — **exists** (sim + adapters)
+## `col.gui.web` / `col.gui.desktop` (colosseum-gui) - **exists** (sim + adapters)
 
 Web and desktop are separate kinds. Drivers: web `sim`|`playwright`; desktop
 `sim`|`generic`|`pywinauto` (Windows-only for pywinauto). Generic commands are
