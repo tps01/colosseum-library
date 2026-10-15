@@ -1,7 +1,7 @@
 # UIA click (desktop)
 
-Uses `automation_id=` (or role+name). Requires `driver=pywinauto` on Windows,
-or `driver=sim` in CI. On Linux, `pywinauto` fails at connect with OSError.
+Uses `automation_id=` (or role+name). Requires `driver=flaui` on Windows,
+or `driver=sim` in CI.
 
 ## FILL_IN_HERE
 

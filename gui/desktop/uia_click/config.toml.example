@@ -3,6 +3,7 @@ desktop_id = 1
 driver = "sim"
 title = "SimWindow"
 # Real Windows DUT:
-# driver = "pywinauto"
+# driver = "flaui"
 # title = "Radio Control"
 # exe = "C:/path/to/app.exe"
+# args = "--settings"

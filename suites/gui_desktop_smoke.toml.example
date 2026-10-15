@@ -1,0 +1,14 @@
+# Skeleton for a desktop GUI smoke suite. Copy beside your project (or keep
+# relative paths into this library) and fill FILL_IN_HERE in each test.
+#
+# Prefer the teaching suite under colosseum-gui for a working end-to-end example:
+#   colosseum run-suite examples/desktop_suite/suite.toml -g examples/desktop_suite/config.toml
+
+name = "gui_desktop_smoke"
+setup = []
+tests = [
+  "../gui/desktop/uia_click/test_uia_click.py",
+  "../gui/desktop/screenshot_match/test_screenshot_match.py",
+]
+teardown = []
+# fail_fast = true

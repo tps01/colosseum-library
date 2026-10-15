@@ -1,12 +1,11 @@
-"""Click a desktop control via UIA AutomationId (pywinauto / sim).
+"""Click a desktop control via UIA AutomationId (flaui / sim).
 
 Required plugins:
   - colosseum-core
   - colosseum-gui
 
-
 Drivers:
-  - ``driver = pywinauto`` (**Windows only**) or ``sim`` for CI
+  - ``driver = flaui`` (**Windows only**) or ``sim`` for CI
 
 Run::
 
