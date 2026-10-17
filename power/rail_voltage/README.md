@@ -11,8 +11,8 @@ Set a PSU rail, measure with a DMM, and verify the expected voltage.
 
 | Name | Meaning |
 | --- | --- |
-| `psu_id` | `[[equipment.psu]]` id |
-| `dmm_id` | `[[equipment.dmm]]` id |
+| `psu_id` | `[equipment.psu]` id |
+| `dmm_id` | `[equipment.dmm]` id |
 | `dmm_channel` | DMM channel for the probe |
 | `set_voltage_v` | PSU setpoint (V) |
 | `current_limit_a` | PSU current limit (A) |

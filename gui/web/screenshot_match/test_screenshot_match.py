@@ -5,7 +5,7 @@ Required plugins:
   - colosseum-gui
 
 Drivers:
-  - ``[[gui.web]]`` with ``driver = sim`` or ``playwright``
+  - ``[gui.web]`` with ``driver = sim`` or ``playwright``
 
 Baselines are environment-locked (OS, scale, headed vs headless).
 

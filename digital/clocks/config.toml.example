@@ -1,9 +1,9 @@
-[[equipment.oscope]]
+[equipment.oscope]
 oscope_id = 1
 driver = sim
 resource = SIM::SCOPE1
 
-[[equipment.freqcounter]]
+[equipment.freqcounter]
 freqcounter_id = 1
 driver = sim
 resource = SIM::FC1

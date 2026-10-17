@@ -1,6 +1,6 @@
 # Desktop GUI catalog
 
-Requires `colosseum-gui` with a `[[gui.desktop]]` row.
+Requires `colosseum-gui` with a `[gui.desktop]` row.
 
 ## Drivers
 
