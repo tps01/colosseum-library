@@ -7,6 +7,6 @@ or `driver=sim` in CI.
 
 | Name | Meaning |
 | --- | --- |
-| `desktop_id` | `[[gui.desktop]]` id |
+| `desktop_id` | `[gui.desktop]` id |
 | `automation_id` | UIA AutomationId |
 | `expected_text` | Control text after the click |

@@ -24,8 +24,8 @@ import colosseum as col
 USE_AUTOCONFIG = True  # False: load sibling config.toml (copy from config.toml.example)
 
 # --- procedure (replace every FILL_IN_HERE) ---
-psu_id = FILL_IN_HERE  # int; [[equipment.psu]] id from autoconfig or config.toml
-dmm_id = FILL_IN_HERE  # int; [[equipment.dmm]] id
+psu_id = FILL_IN_HERE  # int; [equipment.psu] id from autoconfig or config.toml
+dmm_id = FILL_IN_HERE  # int; [equipment.dmm] id
 dmm_channel = FILL_IN_HERE  # int; DMM input channel
 set_voltage_v = FILL_IN_HERE  # V; PSU setpoint
 current_limit_a = FILL_IN_HERE  # A; PSU current limit

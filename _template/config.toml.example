@@ -1,7 +1,7 @@
 # Copy to config.toml next to the test script when USE_AUTOCONFIG = False.
 # Use only plugin-registered sections. Adjust resources and IDs for your bench.
 
-# [[equipment.psu]]
+# [equipment.psu]
 # psu_id = 1
 # driver = visa
 # resource = "USB0::0x1234::0x5678::INSTR"
@@ -10,14 +10,14 @@
 # ovp = 3.6
 # ocp = 1.0
 
-# [[equipment.dmm]]
+# [equipment.dmm]
 # dmm_id = 1
 # driver = visa
 # resource = "USB0::0x2A8D::0x8F01::INSTR"
 # model = generic
 # timeout = 5.0
 
-# [[io.dio]]
+# [io.dio]
 # dio_id = 1
 # driver = sim
 # port_lines = 8

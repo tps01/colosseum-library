@@ -1,14 +1,14 @@
-[[equipment.psu]]
+[equipment.psu]
 psu_id = 1
 driver = sim
 resource = SIM::PSU1
 
-[[equipment.eload]]
+[equipment.eload]
 eload_id = 1
 driver = sim
 resource = SIM::ELOAD1
 
-[[equipment.oscope]]
+[equipment.oscope]
 oscope_id = 1
 driver = sim
 resource = SIM::SCOPE1
