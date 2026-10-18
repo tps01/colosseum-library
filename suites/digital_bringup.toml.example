@@ -1,3 +1,8 @@
+# Fixed fixture: DUT-commanded high/low sense input, a separate isolated DIO
+# loopback pair, and the runner-side Ethernet interface connected to DUT.
+# Never share the loopback drive pin with a DUT output. Merge DIO + SSH config
+# and fill all IDs/commands/interface names. DUT power/firmware are externally
+# prepared. Each GPIO block releases its own drive; link check changes no state.
 name = "digital_bringup"
 setup = []
 tests = [

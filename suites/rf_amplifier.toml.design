@@ -1,0 +1,15 @@
+# Required workflow: VSG/analyzer, VNA and sensor paths require explicit switching or separately confirmed operator reconnections. Define port maps, RF-off switching, insertion-loss correction, per-route calibration and DUT power ownership before sequencing. A list of scripts cannot change the cables; harmonic analysis also remains unimplemented.
+# RESERVED COMPOSITION DESIGN: needs a coherent fixture/stimulus/lifecycle contract.
+# Do not use with run-suite. See README.md and ../docs/target_apis.md.
+name = "rf_amplifier"
+setup = []
+tests = [
+  "../rf/frequency/test_peak_frequency.py",
+  "../rf/harmonics/test_fundamental_power.py",
+  "../rf/harmonics/test_h2_dbc.py.design",
+  "../rf/insertion_loss/test_s21_max_db.py",
+  "../rf/return_loss/test_s11_max_db.py",
+  "../rf/power_meter/test_avg_power_dbm.py",
+]
+teardown = []
+# fail_fast = true

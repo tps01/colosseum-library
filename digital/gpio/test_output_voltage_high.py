@@ -1,4 +1,4 @@
-"""One block: GPIO high voltage."""
+"""DC voltage of a DIO-driven high at the DUT interface, under its input load."""
 
 from __future__ import annotations
 
@@ -7,23 +7,30 @@ from pathlib import Path
 import colosseum as col
 
 # SETUP:
-#   Scope on pin; drive high first.
+#   DIO line -> DUT GPIO input net; DMM HI -> that net; DMM LO -> shared return.
+#   Disable other drivers. DUT power, input load and voltage compatibility are prerequisites.
 
 USE_AUTOCONFIG = False
 
 # --- procedure (replace every FILL_IN_HERE) ---
 dio_id = FILL_IN_HERE
 line = FILL_IN_HERE
-oscope_id = FILL_IN_HERE
-scope_channel = FILL_IN_HERE
+dmm_id = FILL_IN_HERE  # configured DC voltmeter
+dmm_channel = FILL_IN_HERE  # physical DMM input/channel (usually 1)
+settle_s = FILL_IN_HERE  # seconds after drive change before DC measurement
 v_high_min = FILL_IN_HERE
 
 
 def main() -> None:
     _load_bench()
-    col.io.dio.write_pin(dio_id=dio_id, line=line, value=True)
-    col.equipment.oscope.measure_vpp(oscope_id=oscope_id, channel=scope_channel, key="v_high")
-    col.equipment.oscope.verify_vpp(key="v_high", expected_val=v_high_min, tolerance=0.1)
+    try:
+        col.io.dio.configure_pin(dio_id=dio_id, line=line, output=True)
+        col.io.dio.write_pin(dio_id=dio_id, line=line, value=True)
+        col.shared.wait(duration=settle_s)
+        col.equipment.dmm.measure_voltage(dmm_id=dmm_id, channel=dmm_channel, key="v_high")
+        col.shared.verify.verify_field(key="v_high", minimum=v_high_min)
+    finally:
+        col.io.dio.configure_pin(dio_id=dio_id, line=line, output=False)
 
 
 def _load_bench() -> None:

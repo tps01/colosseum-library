@@ -42,6 +42,9 @@ def _load_bench() -> None:
 def main() -> None:
     _load_bench()
 
+    # Define who owns stimulus/DUT power and its initial/final state.
+    # Use try/finally for owned outputs; qualify readiness before measuring.
+    # Do not depend on a previous block leaving power or routing configured.
     # TODO: Replace with measure / command / verify calls (one col.* per line).
     _ = example_id
     _ = example_limit

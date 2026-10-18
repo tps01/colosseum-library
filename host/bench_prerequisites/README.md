@@ -24,3 +24,10 @@ on the bench PC.
 # else a minimal file is fine
 colosseum run test_bench_prerequisites.py --config config.toml
 ```
+
+## Bench hookup and prerequisites
+
+Plugins: Host (and core), no DUT or equipment connection. These are facts about the computer running Colosseum: free memory, free space on the API-selected volume, Python version and VISA backend availability. Confirm that volume is where run artifacts will be written; change the disk path when another volume is the actual requirement. A VISA backend check does not verify a connected, calibrated instrument, and `require_visa=True` rejects a simulated backend as well as a missing one. When false, VISA is optional and a simulated backend is permitted. Neither outcome validates selected equipment drivers or physical readiness.
+
+Use Host **0.4.3+** for reliable PyVISA-sim identification: its native display
+string can omit `@sim`, so earlier Host versions can misclassify that backend.

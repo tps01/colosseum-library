@@ -21,8 +21,9 @@ tolerance_db = FILL_IN_HERE
 
 def main() -> None:
     _load_bench()
-    col.equipment.pwrmeter.set_frequency(pwrmeter_id=pwrmeter_id, frequency=freq_hz)
+    col.equipment.pwrmeter.set_frequency(pwrmeter_id=pwrmeter_id, frequency_hz=freq_hz)
     col.equipment.pwrmeter.set_averaging_count(pwrmeter_id=pwrmeter_id, count=avg_count)
+    col.equipment.pwrmeter.acquire(pwrmeter_id=pwrmeter_id)
     col.equipment.pwrmeter.measure_power(pwrmeter_id=pwrmeter_id, key="avg_dbm")
     col.equipment.pwrmeter.verify_power(key="avg_dbm", expected_val=expected_power_dbm, tolerance=tolerance_db)
 

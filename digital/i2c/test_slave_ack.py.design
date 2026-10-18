@@ -1,0 +1,9 @@
+"""RESERVED DESIGN: Non-destructive I2C probe and actual ACK evidence.
+
+Not executable testware. The speculative implementation was retired.
+Required method, evidence, units, prerequisites and promotion criteria:
+../../docs/measurement_contracts.md#protocol-adapters
+
+Choose a supported transport/acquisition API before implementing this contract.
+Filling placeholders or renaming a proposed method cannot supply that capability.
+"""

@@ -1,21 +1,20 @@
 # RF
 
 Atomic RF path and amplifier building blocks. Instrument APIs live in
-`colosseum-equipment`; trace analysis and derived metrics in `col.shared.signal`
-(TDD).
+`colosseum-equipment`. Implemented derived metrics use local copy-out helpers;
+other methods remain [reserved contracts](../docs/measurement_contracts.md).
 
-Each topic folder shares `config.toml.example` + `README.md`; every script is one
-measurement and one verify.
+Each topic folder shares `config.toml.example` + `README.md`; each executable script has one primary quantity with supporting evidence as needed.
 
 ## Plugins
 
 | Plugin | Used for |
 | --- | --- |
 | `colosseum-equipment` | `vsg`, `speca`, `vna`, `pwrmeter`, `fs740` (TDD) |
-| `colosseum-shared` | Savitzky–... |
+| `colosseum-shared` | Numeric acceptance, bounds and settling waits |
 
-See [docs/target_apis.md](../docs/target_apis.md) for TDD specifications and the
-`speca.measure_bw` / Savitzky–Golay alignment note.
+See [catalog readiness](../docs/target_apis.md) for unavailable capabilities and
+reserved procedure designs.
 
 ## Catalog (22 building blocks)
 
@@ -35,9 +34,12 @@ See [docs/target_apis.md](../docs/target_apis.md) for TDD specifications and the
 
 ### Suite examples
 
-- [suites/rf_passband.toml.example](../suites/rf_passband.toml.example) - S21,
+- [suites/rf_passband.toml.design](../suites/rf_passband.toml.design) - S21,
   S11, gain flatness
-- [suites/rf_linearity.toml.example](../suites/rf_linearity.toml.example) -
+- [suites/rf_linearity.toml.design](../suites/rf_linearity.toml.design) -
   P1dB, IM3, OIP3
-- [suites/rf_amplifier.toml.example](../suites/rf_amplifier.toml.example) -
+- [suites/rf_amplifier.toml.design](../suites/rf_amplifier.toml.design) -
   broader RF acceptance
+
+Rows labeled **reserved** refer to `.py.design` procedure proposals, not runnable
+tests. See [catalog readiness](../docs/target_apis.md) before copying a block.

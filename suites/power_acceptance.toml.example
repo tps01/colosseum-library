@@ -1,8 +1,9 @@
+# Copy/fill parameters.toml before running. The rail block owns its PSU cycle.
 name = "power_acceptance"
 setup = []
 # Same script can appear twice with different parameters= files after copy-out.
 tests = [
-  { path = "../power/rail_voltage/test_rail_voltage.py", parameters = "../power/rail_voltage/parameters.toml.example" },
+  { path = "../power/rail_voltage/test_rail_voltage.py", parameters = "../power/rail_voltage/parameters.toml" },
 ]
 teardown = []
 # fail_fast = true

@@ -1,0 +1,12 @@
+# Required workflow: P1dB needs a single-tone power sweep; IM3/OIP3 need two isolated sources and a combiner. Define a fixed two-source fixture that disables source 2 for P1dB, or explicit RF-off switching/manual reconnect steps with confirmation. Reestablish levels and verify carriers after every route change. P1dB/OIP3 remain unimplemented.
+# RESERVED COMPOSITION DESIGN: needs a coherent fixture/stimulus/lifecycle contract.
+# Do not use with run-suite. See README.md and ../docs/target_apis.md.
+name = "rf_linearity"
+setup = []
+tests = [
+  "../rf/p1db/test_p1db_compression_dbm.py.design",
+  "../rf/ip2_ip3/test_im3_product_power.py",
+  "../rf/ip2_ip3/test_oip3_dbm.py.design",
+]
+teardown = []
+# fail_fast = true

@@ -1,4 +1,4 @@
-# Optional: copy to parameters.toml (or pass --parameters) after fill-in.
+# Required: copy to parameters.toml (or pass --parameters) after fill-in.
 # Sections are evidence keys. Call kwargs still win over this file.
 
 [rail_v]

@@ -1,3 +1,6 @@
+# SIMULATION DEFAULT: generated responses are not DUT evidence.
+# Change the driver AND endpoint for live use; changing resource alone keeps sim.
+# Live setup and required rows: ../../docs/bench_modes.md
 [equipment.vsg]
 vsg_id = 1
 driver = sim

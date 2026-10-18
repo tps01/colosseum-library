@@ -1,0 +1,12 @@
+# Required workflow: The static DUT-command tests release their outputs. Rise time needs an explicit repetitive DUT stimulus, scope trigger setup and acquisition, followed by stopping that stimulus. Choose a separate net or document its reconfiguration; static high/low commands alone cannot produce the required edges.
+# RESERVED COMPOSITION DESIGN: needs a coherent fixture/stimulus/lifecycle contract.
+# Do not use with run-suite. See README.md and ../docs/target_apis.md.
+name = "digital_gpio_bench"
+setup = []
+tests = [
+  "../digital/gpio/test_output_high.py",
+  "../digital/gpio/test_output_low.py",
+  "../digital/gpio/test_rise_time.py",
+]
+teardown = []
+# fail_fast = true

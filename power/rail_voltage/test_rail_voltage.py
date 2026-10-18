@@ -3,6 +3,7 @@
 Required plugins:
   - colosseum-core
   - colosseum-equipment
+  - colosseum-shared
 
 Instruments:
   - PSU (``equipment.psu``)
@@ -31,10 +32,11 @@ dmm_id = FILL_IN_HERE  # int; [equipment.dmm] id
 dmm_channel = FILL_IN_HERE  # int; DMM input channel
 set_voltage_v = FILL_IN_HERE  # V; PSU setpoint
 current_limit_a = FILL_IN_HERE  # A; PSU current limit
-# Prefer sibling parameters.toml [rail_v] (see parameters.toml.example).
-# Inline kwargs still work if you pass expected_val= / tolerance= on the verify call.
-expected_voltage_v = FILL_IN_HERE  # V; used when no parameters file supplies rail_v
-voltage_tolerance_v = FILL_IN_HERE  # V; absolute tolerance, e.g. 0.1
+source_timeout_s = FILL_IN_HERE
+source_tolerance_v = FILL_IN_HERE
+dut_settle_s = FILL_IN_HERE  # qualified startup allowance after source settles
+# Copy parameters.toml.example to parameters.toml and fill [rail_v], or pass
+# --parameters. Limits come from that file, not an implicit inline fallback.
 
 
 def _load_bench() -> None:
@@ -49,18 +51,19 @@ def _load_bench() -> None:
 
 def main() -> None:
     _load_bench()
-
-    col.equipment.psu.set_voltage(psu_id=psu_id, voltage=set_voltage_v)
-    col.equipment.psu.set_current_limit(psu_id=psu_id, current=current_limit_a)
-    col.equipment.psu.set_output(psu_id=psu_id, enabled=True)
-    col.equipment.dmm.measure_voltage(dmm_id=dmm_id, channel=dmm_channel, key="rail_v")
-    # With --parameters / sibling parameters.toml, omit expected_val/tolerance here
-    # so the [rail_v] table fills them. Inline values win when both are present.
-    col.equipment.dmm.verify_voltage(
-        key="rail_v",
-        expected_val=expected_voltage_v,
-        tolerance=voltage_tolerance_v,
-    )
+    try:
+        col.equipment.psu.set_output(psu_id=psu_id, enabled=False)
+        col.equipment.psu.set_voltage(psu_id=psu_id, voltage=set_voltage_v)
+        col.equipment.psu.set_current_limit(psu_id=psu_id, current=current_limit_a)
+        col.equipment.psu.set_output(psu_id=psu_id, enabled=True)
+        col.equipment.psu.wait_for_voltage(psu_id=psu_id, voltage=set_voltage_v, timeout_s=source_timeout_s, tolerance=source_tolerance_v)
+        col.shared.wait(duration=dut_settle_s)
+        col.equipment.dmm.measure_voltage(dmm_id=dmm_id, channel=dmm_channel, key="rail_v")
+        # With --parameters / sibling parameters.toml, omit expected_val/tolerance here
+        # so the [rail_v] table fills them. Inline values win when both are present.
+        col.equipment.dmm.verify_voltage(key="rail_v")
+    finally:
+        col.equipment.psu.set_output(psu_id=psu_id, enabled=False)
 
 
 if __name__ == "__main__":

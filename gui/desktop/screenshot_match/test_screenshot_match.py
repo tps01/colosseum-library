@@ -21,6 +21,7 @@ desktop_id = FILL_IN_HERE  # int
 screenshot_path = FILL_IN_HERE  # str
 baseline_path = FILL_IN_HERE  # str
 max_diff_ratio = FILL_IN_HERE  # float
+settle_timeout_s = FILL_IN_HERE  # bounded best-effort rendering wait
 
 
 def _load_bench() -> None:
@@ -31,6 +32,7 @@ def _load_bench() -> None:
 
 def main() -> None:
     _load_bench()
+    col.gui.desktop.wait_stable(desktop_id=desktop_id, timeout_s=settle_timeout_s)
     col.gui.desktop.capture_screenshot(desktop_id=desktop_id, path=screenshot_path)
     col.gui.desktop.verify_visual(
         key="visual",

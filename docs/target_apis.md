@@ -1,139 +1,68 @@
-# Target APIs (TDD specifications)
+# Catalog readiness and reserved procedures
 
-Catalog scripts call `col.*` plugin APIs. Many calls are **not implemented
-yet**;
-the library defines the API specification that equipment and shared code must
-grow into. Do
-not
-implement these APIs in `colosseum-library` - they belong in first-party
-plugins.
+This is copy-out testware. A `.py` file is an executable procedure template: fill
+its placeholders and establish its stated bench prerequisites. A `.py.design`
+file is a **non-executable design**, retained because it needs a supported acquisition/transport and measurement contract. Renaming a design or filling its values does not implement it.
 
-Status legend: **exists** (callable today), **TDD** (referenced by catalog, not
-yet shipped).
+The executable templates have been checked against the current local core
+0.17.1, equipment 0.5.0, Shared 0.5.0, host 0.4.3, messaging 0.4.3 and GUI 0.3.3
+sources. This is an API check, not a claim of live-bench qualification.
 
-## `col.shared.signal` (colosseum-shared) - TDD
+## Implemented equivalents worth using
 
-Pure trace math and derived RF metrics. Works on CSV traces under the run
-directory
-(`frequency_hz`, `amplitude_dbm` columns) and/or orchestrates instrument sweeps.
+- Scope frequency/rise/fall measurements use `measure_frequency_hz`,
+  `measure_rise_time_s`, and `measure_fall_time_s`, after a fresh acquisition.
+- Equipment eload `set_current`, `engage`, and `disengage` exist.
+- Generic numeric acceptance uses Shared `verify_field(minimum=..., maximum=...)`.
+- Power-meter frequency takes `frequency_hz`; peak and average have distinct APIs.
+- VNA trace setup requires an explicit format; peak S21 is not worst insertion loss.
 
-| API | Status | Used by |
-| --- | --- | --- |
-| `savitzky_golay(...)` | TDD | Internal to trace analysis |
-| `measure_center_frequency(...)` | TDD | `rf/frequ... |
-| `measure_occupied_bandwidth(...)` | TDD | `rf/frequ... |
-| `measure_peak_power_dbm(...)` | TDD | Reserved for wideband peak blocks |
-| `save_smoothed_trace(...)` | TDD | Optional artifact |
-| `measure_mask_margin_db(...)` | TDD | `rf/masking/test_mask_margin_db.py` |
-| `measure_spur_max_dbc(...)` | TDD | `rf/spurs/test_spur_max_dbc.py` |
-| `measure_gain_flatness(...)` | TDD | `rf/gain_... |
-| `measure_harmonic_dbc(...)` | TDD | `rf/harmo... |
-| `measure_oip3(...)` | TDD | `rf/ip2_ip3/test_oip3_dbm.py` |
-| `measure_p1db(...)` | TDD | `rf/p1db/test_p1db_compression_dbm.py` |
-| `measure_s21_max(vna_id, trace, key)` | TDD | `rf/inser... |
-| `measure_s11_max(...)` | TDD | `rf/return_loss/test_s11_max_db.py` |
-| `measure_band_power_dbm(...)` | TDD | `rf/power... |
-| `ramp_eload_current(...)` | TDD | `power/el... |
+## Reserved procedure designs
 
-### Savitzky–Golay alignment note
+Implement or revise the measurement contract before promoting a design to `.py`.
+Protocol adapters, Allan/jitter/eye metrics and derived RF analysis need
+method/capability decisions; this table does not authorize a new Shared signal
+namespace or prescribe a new plugin API. Define calibration, units, bounds, events, references, CRC and smoothing
+before implementing or promoting these proposals. See the concrete
+[measurement contracts](measurement_contracts.md). Speculative code has been removed
+from the reserved slots; these names do not imply implemented APIs.
 
-`col.equipment.speca.measure_bw` documents Savitzky–Golay smoothing, but
-`measure_bandwidth_hz` in equipment currently uses a simple moving average.
-Phase 3 equipment work: refactor to call `col.shared.signal.savitzky_golay`,
-rename `smoothing_order` → `sg_window_length` + `sg_polyorder`.
-
-Implement SG in **stdlib-only** shared code unless a compliant numpy/scipy path
-already exists in equipment (see `colosseum-core/RULES.md` license allowlist).
-
-## `col.io.*` (colosseum-equipment) - mostly TDD
-
-| API | Status | Used by |
-| --- | --- | --- |
-| `col.io.d... | **exists** | `digital/gpio/*` |
-| `col.io.o... | TDD | `digital/onewire/*` |
-| `col.io.i2c.write_read`, `probe` | TDD | `digital/i2c/*` |
-| `col.io.spi.transfer` | TDD | `digital/spi/*` |
-| `col.io.jtag.read_idcode`, `shift_dr` | TDD | `digital/jtag/*` |
-
-## `col.equipment.oscope` - partial TDD
-
-| API | Status | Used by |
-| --- | --- | --- |
-| `measure_jitter(...)` | TDD | `digital/clocks/test_jitter_rms.py` |
-| `measure_phase_delay(...)` | TDD | `digital/clocks/test_alignment_skew.py` |
-| `measure_frequency(oscope_id, channel, key)` | TDD | `digital/... |
-| `measure_duty_cycle(oscope_id, channel, key)` | TDD | `digital/... |
-| `measure_rise_time`, `measure_fall_time` | TDD | `digital/... |
-| `measure_vpp` / DMM voltage | TDD | `digital/gpio/test_output_voltage_*.py` |
-| `measure_common_mode`, `measure_differential` | TDD | `digital/... |
-| `measure_eye_height` | TDD | `digital/ethernet/test_eye_height_mv.py` |
-| `measure_... | TDD | `power/transient/*` |
-
-## `col.equipment.freqcounter` - **exists**
-
-Used by `digital/clocks/test_frequency.py`.
-
-## `col.equipment.fs740` - TDD
-
-| API | Used by |
+| Design | Missing measurement/transport capability |
 | --- | --- |
-| `measure_allan(fs740_id, tau_s, duration_s, key)` | `rf/allan... |
+| [digital/clocks/test_alignment_skew.py.design](../digital/clocks/test_alignment_skew.py.design) | Simultaneous calibrated signed edge skew |
+| [digital/clocks/test_allan_deviation.py.design](../digital/clocks/test_allan_deviation.py.design) | Sampled fractional-frequency Allan deviation |
+| [digital/clocks/test_jitter_rms.py.design](../digital/clocks/test_jitter_rms.py.design) | Defined timestamp-based RMS jitter |
+| [digital/ethernet/test_eye_height_mv.py.design](../digital/ethernet/test_eye_height_mv.py.design) | PHY-qualified eye acquisition and height statistic |
+| [digital/gpio/test_common_mode_voltage.py.design](../digital/gpio/test_common_mode_voltage.py.design) | Simultaneous calibrated common-mode voltage |
+| [digital/gpio/test_differential_voltage.py.design](../digital/gpio/test_differential_voltage.py.design) | Simultaneous calibrated differential voltage |
+| [digital/i2c/test_master_write_read.py.design](../digital/i2c/test_master_write_read.py.design) | I2C transaction transport and byte/ACK evidence |
+| [digital/i2c/test_slave_ack.py.design](../digital/i2c/test_slave_ack.py.design) | Non-destructive I2C probe and actual ACK evidence |
+| [digital/jtag/test_idcode.py.design](../digital/jtag/test_idcode.py.design) | Chain-aware JTAG IDCODE transport and comparison |
+| [digital/jtag/test_ir_dr_shift.py.design](../digital/jtag/test_ir_dr_shift.py.design) | Chain-aware JTAG IR/DR transport and bit comparison |
+| [digital/onewire/test_brownout_presence.py.design](../digital/onewire/test_brownout_presence.py.design) | Measured supply sequence and acquired presence-pulse evidence |
+| [digital/onewire/test_parasitic_power.py.design](../digital/onewire/test_parasitic_power.py.design) | Qualified strong-pull-up operation without external VDD |
+| [digital/onewire/test_rom_read.py.design](../digital/onewire/test_rom_read.py.design) | 1-Wire ROM transport, addressing and CRC evidence |
+| [digital/onewire/test_scratchpad_crc.py.design](../digital/onewire/test_scratchpad_crc.py.design) | 1-Wire scratchpad transport and CRC over received bytes |
+| [digital/spi/test_master_transfer.py.design](../digital/spi/test_master_transfer.py.design) | SPI master transfer and byte evidence |
+| [digital/spi/test_slave_response.py.design](../digital/spi/test_slave_response.py.design) | Slave-capable SPI fixture and response evidence |
+| [digital/tachometer_pwm/test_pwm_duty_cycle.py.design](../digital/tachometer_pwm/test_pwm_duty_cycle.py.design) | Repetitive waveform capture and duty-cycle statistic |
+| [power/eload/test_current_monotonic_ramp.py.design](../power/eload/test_current_monotonic_ramp.py.design) | Independent timestamped current and compliance evidence |
+| [rf/allan_deviation/test_allan_sigma.py.design](../rf/allan_deviation/test_allan_sigma.py.design) | Sampled fractional-frequency Allan deviation |
+| [rf/frequency/test_center_frequency.py.design](../rf/frequency/test_center_frequency.py.design) | Explicit center-frequency definition and trace acquisition |
+| [rf/frequency/test_occupied_bandwidth.py.design](../rf/frequency/test_occupied_bandwidth.py.design) | Integrated-power OBW with declared percentage and band edges |
+| [rf/gain_flatness/test_gain_flatness_db.py.design](../rf/gain_flatness/test_gain_flatness_db.py.design) | Corrected unsmoothed gain versus frequency |
+| [rf/harmonics/test_h2_dbc.py.design](../rf/harmonics/test_h2_dbc.py.design) | Corrected H2 and fundamental measurement |
+| [rf/harmonics/test_h3_dbc.py.design](../rf/harmonics/test_h3_dbc.py.design) | Corrected H3 and fundamental measurement |
+| [rf/ip2_ip3/test_oip3_dbm.py.design](../rf/ip2_ip3/test_oip3_dbm.py.design) | Qualified balanced-tone carriers and both IM3 products |
+| [rf/masking/test_mask_margin_db.py.design](../rf/masking/test_mask_margin_db.py.design) | Full unsmoothed trace-to-mask comparison |
+| [rf/p1db/test_p1db_compression_dbm.py.design](../rf/p1db/test_p1db_compression_dbm.py.design) | Calibrated power sweep and compression crossing |
+| [rf/power_meter/test_band_power_dbm.py.design](../rf/power_meter/test_band_power_dbm.py.design) | Calibrated selected-band linear-power integration |
+| [rf/spurs/test_spur_max_dbc.py.design](../rf/spurs/test_spur_max_dbc.py.design) | Unsmoothed spur search with explicit reference and exclusions |
 
-## `col.equipment.vsg`, `speca`, `vna`, `pwrmeter` - mostly **exists**
+## Suite readiness
 
-Existing marker, sweep, and power APIs cover CW peak frequency, harmonics
-fundamental power, dual-tone blocks, VNA S11/S21 spot markers, and pwrmeter
-avg/peak.
-
-TDD additions on speca side: mask overlay artifact (`save_trace_with_mask`).
-
-## `col.equipment.psu`, `eload` - partial
-
-PSU set/measure/verify: **exists** (`power/rail_voltage`, `power/eload`).
-
-Eload engage/disengage/set_current: TDD (referenced by transient and eload
-blocks).
-
-## `col.host.net`, `col.messaging.ssh`, `col.shared.regex` - partial TDD
-
-| API | Used by |
-| --- | --- |
-| `col.host... | `digital/ethernet/test_link_up.py` |
-| SSH stdout + `col.shared.regex.verify_match` | `digital/... |
-| `col.messaging.ssh.measure_stdout` | `digital/... |
-
-## `col.shared.verify` - **exists**
-
-Generic `verify_field`, `verify_measurement_exists` used across the catalog when
-no dedicated instrument verifier exists.
-
-## `col.gui.web` / `col.gui.desktop` (colosseum-gui) - **exists** (sim + adapters)
-
-Web and desktop are separate kinds. Drivers: web `sim`|`playwright`; desktop
-`sim`|`generic`|`pywinauto` (Windows-only for pywinauto). Generic commands are
-best-effort; tree locators raise `GuiCapabilityError` on the wrong driver.
-
-| API | Status | Used by |
-| --- | --- | --- |
-| `col.gui.... | **exists** | `gui/web/button_visible` |
-| `col.gui.... | **exists** | `gui/web/screenshot_match` |
-| `col.gui.... | **exists** | `gui/web/contrast_ratio` |
-| `col.gui.... | **exists** | `gui/web/navigation_ms` |
-| `col.gui.desktop.click(image=)` | **exists** | `gui/desktop/image_click` |
-| `col.gui.desktop.click(...)` | **exists** | `gui/desktop/uia_click` |
-| `col.gui.... | **exists** | `gui/desktop/screenshot_match` |
-
-## Runnable today (Phase 2 priority)
-
-Scripts that can run with current equipment after filling `FILL_IN_HERE`:
-
-- `digital/gpio/test_output_high.py`, `test_output_low.py`,
-  `test_loopback_pattern.py`
-- `digital/ethernet/test_link_up.py` (with host TOML)
-- `power/rail_voltage/test_rail_voltage.py`
-- `rf/insertion_loss/*`, `rf/return_loss/*` (VNA)
-- `rf/frequency/test_peak_frequency.py`,
-  `rf/harmonics/test_fundamental_power.py`
-- `rf/power_meter/test_avg_power_dbm.py`
-
-All other blocks depend on TDD APIs listed above.
+`.toml.example` files reference executable templates. `.toml.design` files are
+reserved composition sketches and are not runnable suites. In particular, the
+RF and GPIO edge designs still need stimulus, routing, capture
+and cleanup contracts. A suite needs one coherent fixture; filenames alone do
+not establish it.

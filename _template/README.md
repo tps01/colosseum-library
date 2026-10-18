@@ -21,3 +21,12 @@ user's project copy.
 8. Short `README.md` in the test folder listing FILL_IN_HERE keys and plugins.
 9. Document optional `--report wats` / `--report junit` in the run section when
    useful; do not invent library-owned report switches.
+
+## Procedure contract before copy-out
+
+Include a terminal/signal connection map (stimulus -> DUT -> receiver, plus
+returns/references), required plugins and supported model capabilities, DUT
+power/firmware/control mode and external services. Define calibration/reference
+planes, units/statistic/acceptance, acquisition ordering and output ownership.
+Separate fixture self-tests from DUT behavior and identify evidence that rejects
+missing stimulus. Name any required companion files and parameter-file limits.

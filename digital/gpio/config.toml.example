@@ -1,10 +1,27 @@
+# SIMULATION DEFAULT: generated responses are not DUT evidence.
+# Change the driver AND endpoint for live use; changing resource alone keeps sim.
+# Live setup and required rows: ../../docs/bench_modes.md
 [io.dio]
 dio_id = 1
 driver = sim
 port_lines = 8
-direction = 0xFF
+direction = 0x00  # all inputs until a fixture block explicitly owns an output
 
 [equipment.oscope]
 oscope_id = 1
 driver = sim
 resource = SIM::SCOPE1
+
+# Static interface-level blocks use a DC voltmeter, not scope Vpp.
+[equipment.dmm]
+dmm_id = 1
+driver = sim
+resource = SIM::DMM1
+
+# DUT-commanded output high/low use Messaging, not a bench output drive.
+[messaging.ssh]
+ssh_id = 1
+driver = sim
+host = "127.0.0.1"
+username = "sim"
+# For hardware use driver = ssh and configure the actual DUT/auth/known_hosts.

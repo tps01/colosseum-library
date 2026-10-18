@@ -37,7 +37,7 @@ def main() -> None:
     col.gui.web.navigate(web_id=web_id, url=url)
     col.gui.web.measure_navigation_ms(web_id=web_id, key="nav_ms")
     # Pass if measured time is within [0, max_ms].
-    col.shared.verify.verify_field(key="nav_ms", expected_val=0.0, tolerance=max_ms)
+    col.shared.verify.verify_field(key="nav_ms", minimum=0.0, maximum=max_ms)
 
 
 if __name__ == "__main__":

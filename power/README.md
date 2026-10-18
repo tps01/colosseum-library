@@ -2,14 +2,14 @@
 
 Atomic PSU, DMM, eload, and transient-response building blocks.
 
-**Start here:** [rail_voltage/](rail_voltage/) (optional `parameters.toml` for limits).
+**Start here:** [rail_voltage/](rail_voltage/) (required parameter-file limits).
 
 ## Plugins
 
 | Plugin | Used for |
 | --- | --- |
-| `colosseum-equipment` | `col.equipment.psu`, `dmm`, `eload` (...)` |
-| `colosseum-shared` | `col.shared.signal.ramp_eload_current` (...)` |
+| `colosseum-equipment` | PSU, DMM, eload and scope acquisition |
+| `colosseum-shared` | Numeric acceptance, bounds and settling waits |
 
 See [docs/target_apis.md](../docs/target_apis.md) for TDD specifications.
 
@@ -27,3 +27,6 @@ See [docs/target_apis.md](../docs/target_apis.md) for TDD specifications.
   - steady rail check
 - [suites/power_dynamic.toml.example](../suites/power_dynamic.toml.example) -
   load step + transient
+
+Rows labeled **reserved** refer to `.py.design` procedure proposals, not runnable
+tests. See [catalog readiness](../docs/target_apis.md) before copying a block.

@@ -1,0 +1,12 @@
+# Required workflow: Use a calibrated VNA-only fixture for S21/S11/flatness. Define DUT power, reference planes, common sweep/grid and source level. Flatness needs a supported implementation. VNA RF enable/disable must be owned by the fixture controller; no generic output-off API currently exists.
+# RESERVED COMPOSITION DESIGN: needs a coherent fixture/stimulus/lifecycle contract.
+# Do not use with run-suite. See README.md and ../docs/target_apis.md.
+name = "rf_passband"
+setup = []
+tests = [
+  "../rf/insertion_loss/test_s21_max_db.py",
+  "../rf/return_loss/test_s11_max_db.py",
+  "../rf/gain_flatness/test_gain_flatness_db.py.design",
+]
+teardown = []
+# fail_fast = true

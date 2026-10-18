@@ -1,6 +1,6 @@
 # Colosseum Library
 
-Reusable **copy-out example test stubs** for Colosseum benches. This is
+Reusable **copy-out test procedures and reserved designs** for Colosseum benches. This is
 testware, not a `col.*` plugin: there is no installable package and no
 `colosseum.plugins` entry point. Tests call first-party plugins
 (`col.equipment`, `col.io`, `col.host`, `col.shared`, …) after you copy a folder
@@ -13,10 +13,10 @@ https://tps01.github.io/colosseum-core/ — see **Testware library**.
 
 | Stub | Why start here |
 | --- | --- |
-| [`power/rail_voltage/`](power/rail_voltage/) | Classic measure → verify; optional `parameters.toml` for limits |
+| [`power/rail_voltage/`](power/rail_voltage/) | Classic measure → verify; parameter-file rail limits |
 | [`digital/gpio/`](digital/gpio/) | DIO bring-up blocks |
 | [`host/bench_prerequisites/`](host/bench_prerequisites/) | Plugin-light PC checks (good early smoke) |
-| [`suites/power_acceptance.toml.example`](suites/power_acceptance.toml.example) | Suite composing the rail stub (optional `parameters=`) |
+| [`suites/power_acceptance.toml.example`](suites/power_acceptance.toml.example) | Suite composing the rail procedure with parameter-file limits |
 
 ## Why
 
@@ -30,7 +30,9 @@ config TOML examples.
 1. Copy a test directory (for example `power/rail_voltage/`) into your project.
 2. Replace every `FILL_IN_HERE` in the Python script (units are in trailing
    comments).
-3. Wire instruments:
+3. Read the topic's **Bench hookup and prerequisites** (or equivalent connection
+   section), connect DUT signal/power/return paths, and establish DUT mode,
+   calibration and external services. Configure instrument communication:
    - **Autoconfig** (VISA gear): leave `USE_AUTOCONFIG = True`, or call
      `col.equipment.autoconfig(export_path="config.toml")` once and copy IDs into
      the script.
@@ -38,8 +40,9 @@ config TOML examples.
      `USE_AUTOCONFIG = False`.
 4. Install the plugins listed in the test docstring (same env as
    `colosseum-core`, from GitHub Release wheels).
-5. Optionally copy `parameters.toml.example` → `parameters.toml` (or pass
-   `--parameters`) for limit kwargs by evidence key.
+5. Copy/fill `parameters.toml.example` → `parameters.toml` (or pass
+   `--parameters`) where the procedure requires file-based limits; the rail
+   example requires them. Other inline limit arguments take precedence over a file.
 6. Run:
 
 ```sh
@@ -58,13 +61,19 @@ cannot silently measure the wrong thing.
 | Path | Purpose |
 | --- | --- |
 | `_template/` | Copy this when adding a new catalog test |
-| `docs/target_apis.md` | TDD specifications referenced by catalog scripts |
+| `docs/target_apis.md` | Executable/reserved procedure readiness |
 | `digital/` | 32 atomic blocks (GPIO, buses, clocks, ethernet, fan/PWM) |
 | `rf/` | 22 atomic RF blocks (VNA, SA, pwrmeter, trace analysis) |
 | `power/` | 6 atomic blocks (rail, transient, eload) |
 | `host/` | Bench-PC prerequisites and telemetry |
 | `gui/` | Product UI automation (`col.gui.web` / `col.gui.desktop`) |
 | `suites/` | Suite TOML templates that compose building blocks |
+
+Executable templates use `.py`; procedures needing unavailable APIs use
+`.py.design` and are not runnable. See [catalog readiness](docs/target_apis.md)
+for the complete missing-capability list. There are 39 executable templates and
+29 reserved procedure designs at this checkpoint. API compatibility does not
+establish bench readiness.
 
 Each **topic folder** is self-contained: shared `config.toml.example`,
 `README.md` (block index), and one `test_<measure>.py` per building block (one
@@ -104,18 +113,20 @@ Paths in suite TOML are relative to the suite file. See
 Every catalog script:
 
 1. May include stimulus/setup commands.
-2. Emits **exactly one** `@measurement` row (one `key`).
-3. Ends with **exactly one** verify for that quantity.
+2. Defines one primary acceptance quantity; supporting prerequisite measurements
+   and raw trace artifacts are retained when needed for a valid verdict.
+3. Verifies that quantity and any required prerequisites with explicit evidence keys.
 4. Keeps `FILL_IN_HERE` in the committed catalog; wiring goes in `# SETUP:`
    comments.
 
-Suites compose blocks - they do not combine multiple measurements in one script.
+Suites compose blocks. A block may retain supporting evidence; a filename is
+not a reason to discard the carrier-presence checks needed to validate IM3.
 
 ## Plugin dependencies by domain
 
-See each domain `README.md` and [docs/target_apis.md](docs/target_apis.md). Many
-scripts call TDD APIs not yet implemented in plugins; equipment rises to meet
-them.
+See each domain `README.md` and [docs/target_apis.md](docs/target_apis.md). Reserved `.py.design` files refer to proposed capabilities that are not
+implemented. They are excluded from executable suite templates; promote them
+only after the method and prerequisites are defined and implemented.
 
 - **digital** - `colosseum-equipment`, `colosseum-shared`, `colosseum-host`,
   `colosseum-messaging`
@@ -133,3 +144,33 @@ them.
 - Tests should be portable: autoconfig + correct physical setup should cover
   most complexity
 - Scripts may use libraries outside Colosseum when necessary
+
+## Numeric acceptance limits
+
+Catalog blocks using `verify_field(minimum=..., maximum=...)` require
+`colosseum-shared` **0.5.0 or newer** in the runner's environment. Bounds are
+inclusive and reject non-finite measurements. Use `expected_val` / `tolerance`
+for a target window, or `minimum` / `maximum` for limits; do not combine them.
+Signed dBc upper limits remain negative values; a more negative reading passes.
+Skew is bounded on both sides of zero. Limits are in the measurement's units.
+
+Transient and fresh power-sensor capture procedures require Equipment **0.5.0+**.
+Copy topic folders with their companion helpers (`transient_response.py` or
+`two_tone.py`) where present; the helpers are local testware, not plugins.
+
+## Bench modes and lifecycle
+
+Read [simulation to live setup](docs/bench_modes.md) before interpreting results.
+Most configs deliberately default to simulation; changing an address does not
+select a live driver. Each block states whether it owns stimulus or requires
+externally prepared DUT/fixture state. Owned outputs are released in `finally`;
+VNA RF output remains explicitly fixture-owned because no public disable API is
+available. See topic prerequisites and [suite state contracts](suites/README.md).
+
+The 29 reserved slots have [precise measurement contracts](docs/measurement_contracts.md),
+with the old speculative implementations removed. They still require supported
+acquisition/transport implementations and qualification before promotion.
+
+The historical `scripts/scaffold_catalog.py` was retired because importing or
+running it overwrote corrected procedures with obsolete generated code. Add or
+edit blocks directly from `_template/`; there is no catalog regeneration step.
