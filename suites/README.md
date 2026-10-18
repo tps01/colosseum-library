@@ -34,3 +34,9 @@ use `colosseum-gui/examples/desktop_suite/` (requires gui 0.2.3+ and shared 0.3.
 
 Optional `fail_fast = true` stops remaining tests after a required failure;
 teardown still runs.
+
+A test entry may set `parameters = "relative/path.toml"` (resolved from the suite
+file). CLI `--parameters` still wins for the whole process. See
+`power_acceptance.toml.example` for a rail check that points at a limits file.
+After copy-out, rename `parameters.toml.example` → `parameters.toml` (or point
+`parameters=` at your filled file).

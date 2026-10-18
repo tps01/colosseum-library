@@ -1,10 +1,22 @@
 # Colosseum Library
 
-Reusable **copy-out** test scripts for Colosseum benches. This is testware, not
-a
-`col.*` plugin: there is no installable package and no `colosseum.plugins` entry
-point. Tests call first-party plugins (`col.equipment`, `col.io`, `col.host`,
-`col.shared`, …) after you copy a folder into your project and fill parameters.
+Reusable **copy-out example test stubs** for Colosseum benches. This is
+testware, not a `col.*` plugin: there is no installable package and no
+`colosseum.plugins` entry point. Tests call first-party plugins
+(`col.equipment`, `col.io`, `col.host`, `col.shared`, …) after you copy a folder
+into your project and fill placeholders.
+
+Framework docs (install, runners, parameters, reports):
+https://tps01.github.io/colosseum-core/ — see **Testware library**.
+
+## Recommended first copies
+
+| Stub | Why start here |
+| --- | --- |
+| [`power/rail_voltage/`](power/rail_voltage/) | Classic measure → verify; optional `parameters.toml` for limits |
+| [`digital/gpio/`](digital/gpio/) | DIO bring-up blocks |
+| [`host/bench_prerequisites/`](host/bench_prerequisites/) | Plugin-light PC checks (good early smoke) |
+| [`suites/power_acceptance.toml.example`](suites/power_acceptance.toml.example) | Suite composing the rail stub (optional `parameters=`) |
 
 ## Why
 
@@ -17,7 +29,7 @@ config TOML examples.
 
 1. Copy a test directory (for example `power/rail_voltage/`) into your project.
 2. Replace every `FILL_IN_HERE` in the Python script (units are in trailing
-  comments).
+   comments).
 3. Wire instruments:
    - **Autoconfig** (VISA gear): leave `USE_AUTOCONFIG = True`, or call
      `col.equipment.autoconfig(export_path="config.toml")` once and copy IDs into
@@ -25,13 +37,17 @@ config TOML examples.
    - **TOML**: copy `config.toml.example` → `config.toml`, set resources, set
      `USE_AUTOCONFIG = False`.
 4. Install the plugins listed in the test docstring (same env as
-  `colosseum-core`).
-5. Run:
+   `colosseum-core`, from GitHub Release wheels).
+5. Optionally copy `parameters.toml.example` → `parameters.toml` (or pass
+   `--parameters`) for limit kwargs by evidence key.
+6. Run:
 
 ```sh
 colosseum run path/to/test_rail_voltage.py
 # or with an explicit config when USE_AUTOCONFIG is False:
 colosseum run path/to/test_rail_voltage.py --config path/to/config.toml
+# optional reports (off by default):
+colosseum run path/to/test_rail_voltage.py --config path/to/config.toml --report junit
 ```
 
 Unfilled `FILL_IN_HERE` raises `NameError` immediately so a half-configured copy
@@ -51,21 +67,21 @@ cannot silently measure the wrong thing.
 | `suites/` | Suite TOML templates that compose building blocks |
 
 Each **topic folder** is self-contained: shared `config.toml.example`,
-`README.md`
-(block index), and one `test_<measure>.py` per building block (one measurement +
-one verify). Copy a topic folder or chain blocks via suite TOML.
+`README.md` (block index), and one `test_<measure>.py` per building block (one
+measurement + one verify). Copy a topic folder or chain blocks via suite TOML.
 
 ## Autoconfig vs TOML
 
 | Layer | What changes | How to fill |
 | --- | --- | --- |
 | Instruments | VISA resources, models, IDs | `col.equipment.autoconfig(...)` |
-| Procedure | Frequenci... | `FILL_IN_HERE` in the Python file |
+| Procedure | Frequencies, pins, limits | `FILL_IN_HERE` in the Python file |
+| Limit kwargs (optional) | `expected_val`, tolerances by `key=` | sibling / suite / CLI parameters TOML |
 
 Autoconfig today discovers VISA instruments only. DIO, serial, SSH, host
-profile,
-and DUT endpoints still need TOML or script parameters. After autoconfig, assign
-instrument IDs from the log or an exported TOML (`export_path=...`).
+profile, and DUT endpoints still need TOML or script parameters. After
+autoconfig, assign instrument IDs from the log or an exported TOML
+(`export_path=...`).
 
 Scripts skip loading when config is already loaded so the same file works in a
 suite that shared `setup` / `--config`.
@@ -91,7 +107,7 @@ Every catalog script:
 2. Emits **exactly one** `@measurement` row (one `key`).
 3. Ends with **exactly one** verify for that quantity.
 4. Keeps `FILL_IN_HERE` in the committed catalog; wiring goes in `# SETUP:`
-  comments.
+   comments.
 
 Suites compose blocks - they do not combine multiple measurements in one script.
 
@@ -106,19 +122,14 @@ them.
 - **rf** - `colosseum-equipment`, `colosseum-shared` (trace analysis TDD)
 - **power** - `colosseum-equipment`, `colosseum-shared`
 - **host** - `colosseum-host`
-- **gui** - `colosseum-gui` (`pip install colosseum-gui`; includes web + desktop
-  drivers)
+- **gui** - `colosseum-gui` (includes web + desktop drivers)
 
-## Library Ground Rules
+## Library ground rules
 
 - The library does not need CI/CD
-- The library does not need test scripts/ unit tests (though tests from the
-  library are valid as e2e tests themselves)
-- The library does not need versioning or gitflow, though a simple develop ->
-  main mechanism is fine.
-- Tests in the library should be portable. An inexperienced user should have to
-  do minimal coding to get a test working. (i.e. autoconfig + a correct physical
-  hardware setup should handle most complexity)
-- Library tests may use libraries outside colosseum to accomplish certain tasks,
-  when necessary. Colosseum is built on python for this reason- one framework
-  cannot possibly cover every use-case or test flow.
+- The library does not need unit tests (catalog scripts are the examples)
+- The library does not need versioning or gitflow, though a simple develop →
+  main mechanism is fine
+- Tests should be portable: autoconfig + correct physical setup should cover
+  most complexity
+- Scripts may use libraries outside Colosseum when necessary

@@ -2,6 +2,8 @@
 
 Atomic bring-up blocks for GPIO, buses, clocks, ethernet, and fan/PWM/tach.
 
+**Start here:** [gpio/](gpio/) (see also `suites/digital_gpio_bench.toml.example`).
+
 Each topic folder has a shared `config.toml.example`, `README.md` (block index),
 and
 one `test_<measure>.py` per building block (one measurement + one verify).

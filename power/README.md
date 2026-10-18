@@ -2,6 +2,8 @@
 
 Atomic PSU, DMM, eload, and transient-response building blocks.
 
+**Start here:** [rail_voltage/](rail_voltage/) (optional `parameters.toml` for limits).
+
 ## Plugins
 
 | Plugin | Used for |

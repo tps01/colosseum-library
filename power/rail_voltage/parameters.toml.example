@@ -1,0 +1,6 @@
+# Optional: copy to parameters.toml (or pass --parameters) after fill-in.
+# Sections are evidence keys. Call kwargs still win over this file.
+
+[rail_v]
+expected_val = 3.3
+tolerance = 0.1
