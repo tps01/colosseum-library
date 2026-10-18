@@ -5,7 +5,7 @@ Required plugins:
   - colosseum-gui
 
 Drivers:
-  - ``[[gui.web]]`` with ``driver = sim`` or ``playwright``
+  - ``[gui.web]`` with ``driver = sim`` or ``playwright``
 
 Run (after copy-out and filling FILL_IN_HERE)::
 
@@ -22,7 +22,7 @@ import colosseum as col
 USE_AUTOCONFIG = False
 
 # --- procedure (replace every FILL_IN_HERE) ---
-web_id = FILL_IN_HERE  # int; [[gui.web]] web_id
+web_id = FILL_IN_HERE  # int; [gui.web] web_id
 button_role = FILL_IN_HERE  # str; e.g. "button"
 button_name = FILL_IN_HERE  # str; e.g. "Start"
 status_role = FILL_IN_HERE  # str; e.g. "status"

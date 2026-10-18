@@ -4,7 +4,7 @@
 
 | Name | Meaning |
 | --- | --- |
-| `web_id` | `[[gui.web]]` id |
+| `web_id` | `[gui.web]` id |
 | `url` | Absolute URL to open |
 | `max_ms` | Soft uppe... |
 

@@ -12,6 +12,8 @@ Run (after copy-out and filling FILL_IN_HERE)::
 
     colosseum run test_rail_voltage.py
     colosseum run test_rail_voltage.py --config config.toml
+    colosseum run test_rail_voltage.py --config config.toml --parameters parameters.toml
+    colosseum run test_rail_voltage.py --config config.toml --report junit
 """
 
 from __future__ import annotations
@@ -24,12 +26,14 @@ import colosseum as col
 USE_AUTOCONFIG = True  # False: load sibling config.toml (copy from config.toml.example)
 
 # --- procedure (replace every FILL_IN_HERE) ---
-psu_id = FILL_IN_HERE  # int; [[equipment.psu]] id from autoconfig or config.toml
-dmm_id = FILL_IN_HERE  # int; [[equipment.dmm]] id
+psu_id = FILL_IN_HERE  # int; [equipment.psu] id from autoconfig or config.toml
+dmm_id = FILL_IN_HERE  # int; [equipment.dmm] id
 dmm_channel = FILL_IN_HERE  # int; DMM input channel
 set_voltage_v = FILL_IN_HERE  # V; PSU setpoint
 current_limit_a = FILL_IN_HERE  # A; PSU current limit
-expected_voltage_v = FILL_IN_HERE  # V; verification target
+# Prefer sibling parameters.toml [rail_v] (see parameters.toml.example).
+# Inline kwargs still work if you pass expected_val= / tolerance= on the verify call.
+expected_voltage_v = FILL_IN_HERE  # V; used when no parameters file supplies rail_v
 voltage_tolerance_v = FILL_IN_HERE  # V; absolute tolerance, e.g. 0.1
 
 
@@ -50,6 +54,8 @@ def main() -> None:
     col.equipment.psu.set_current_limit(psu_id=psu_id, current=current_limit_a)
     col.equipment.psu.set_output(psu_id=psu_id, enabled=True)
     col.equipment.dmm.measure_voltage(dmm_id=dmm_id, channel=dmm_channel, key="rail_v")
+    # With --parameters / sibling parameters.toml, omit expected_val/tolerance here
+    # so the [rail_v] table fills them. Inline values win when both are present.
     col.equipment.dmm.verify_voltage(
         key="rail_v",
         expected_val=expected_voltage_v,

@@ -15,5 +15,9 @@ user's project copy.
 4. `def main():` with one `col.*` call per line (keyword args).
 5. `if __name__ == "__main__": main(); col.endex()`.
 6. Optional `config.toml.example` using real plugin section names only
-   (`[[equipment.*]]`, `[[io.dio]]`, … - never `[library.*]`).
-7. Short `README.md` in the test folder listing FILL_IN_HERE keys and plugins.
+   (`[[equipment.*]]`, `[io.dio]`, … - never `[library.*]`).
+7. Optional `parameters.toml.example` for limit kwargs by evidence `key=`
+   (sibling `parameters.toml`, suite entry `parameters=`, or CLI `--parameters`).
+8. Short `README.md` in the test folder listing FILL_IN_HERE keys and plugins.
+9. Document optional `--report wats` / `--report junit` in the run section when
+   useful; do not invent library-owned report switches.

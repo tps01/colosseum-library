@@ -1,6 +1,6 @@
 # Web GUI catalog
 
-Requires `colosseum-gui` with a `[[gui.web]]` row (`driver = sim` or
+Requires `colosseum-gui` with a `[gui.web]` row (`driver = sim` or
 `playwright`).
 
 ## Blocks

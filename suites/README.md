@@ -27,6 +27,16 @@ for mixed suites (DIO + host + instruments).
 | `rf_passband.toml.example` | S21 max, S11 max, gain flatness |
 | `rf_linearity.toml.example` | P1dB, IM3, OIP3 |
 | `rf_amplifier.toml.example` | broader RF acceptance (6 blocks) |
+| `gui_desktop_smoke.toml.example` | desktop UIA click + screenshot match |
+
+For a fuller Windows teaching suite (multi-desktop, `args=`, hotkey, file wait),
+use `colosseum-gui/examples/desktop_suite/` (requires gui 0.2.3+ and shared 0.3.5+).
 
 Optional `fail_fast = true` stops remaining tests after a required failure;
 teardown still runs.
+
+A test entry may set `parameters = "relative/path.toml"` (resolved from the suite
+file). CLI `--parameters` still wins for the whole process. See
+`power_acceptance.toml.example` for a rail check that points at a limits file.
+After copy-out, rename `parameters.toml.example` → `parameters.toml` (or point
+`parameters=` at your filled file).

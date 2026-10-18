@@ -1,6 +1,6 @@
 # Desktop GUI catalog
 
-Requires `colosseum-gui` with a `[[gui.desktop]]` row.
+Requires `colosseum-gui` with a `[gui.desktop]` row.
 
 ## Drivers
 
@@ -8,14 +8,14 @@ Requires `colosseum-gui` with a `[[gui.desktop]]` row.
 | --- | --- | --- |
 | `sim` | automation_id / role+name / image | any (CI) |
 | `generic` | image / x,y (best-effort) | Linux X11, Windows |
-| `pywinauto` | AutomationId / Name / Invoke | **Windows only** |
+| `flaui` | AutomationId / Name / Invoke / XPath | **Windows only** |
 
 ## Blocks
 
 | Test | Status | Notes |
 | --- | --- | --- |
 | [image_click](image_click/) | Exemplar | Generic/sim image template click |
-| [uia_click](uia_click/) | Exemplar | pywinauto... |
+| [uia_click](uia_click/) | Exemplar | FlaUI (or sim) AutomationId click |
 | [screenshot_match](screenshot_match/) | Exemplar | Capture + visual baseline |
 
 ## Screen objects

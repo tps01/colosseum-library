@@ -74,7 +74,7 @@ def topic(folder: Path, bench_text: str, title: str, intro: str, tests: list[dic
 topic(
     ROOT / "digital" / "onewire",
     """
-[[equipment.psu]]
+[equipment.psu]
 psu_id = 1
 driver = sim
 resource = SIM::PSU1
@@ -120,12 +120,12 @@ resource = SIM::PSU1
 topic(
     ROOT / "digital" / "clocks",
     """
-[[equipment.oscope]]
+[equipment.oscope]
 oscope_id = 1
 driver = sim
 resource = SIM::SCOPE1
 
-[[equipment.freqcounter]]
+[equipment.freqcounter]
 freqcounter_id = 1
 driver = sim
 resource = SIM::FC1
@@ -171,13 +171,13 @@ resource = SIM::FC1
 topic(
     ROOT / "digital" / "ethernet",
     """
-[[messaging.ssh]]
+[messaging.ssh]
 ssh_id = 1
 host = "192.168.1.10"
 username = "root"
 password = "changeme"
 
-[[messaging.http]]
+[messaging.http]
 http_id = 1
 base_url = "http://192.168.1.10"
 """,
@@ -230,13 +230,13 @@ base_url = "http://192.168.1.10"
 topic(
     ROOT / "digital" / "tachometer_pwm",
     """
-[[messaging.ssh]]
+[messaging.ssh]
 ssh_id = 1
 host = "192.168.1.10"
 username = "root"
 password = "changeme"
 
-[[equipment.oscope]]
+[equipment.oscope]
 oscope_id = 1
 driver = sim
 resource = SIM::SCOPE1
@@ -282,13 +282,13 @@ resource = SIM::SCOPE1
 topic(
     ROOT / "digital" / "gpio",
     """
-[[io.dio]]
+[io.dio]
 dio_id = 1
 driver = sim
 port_lines = 8
 direction = 0xFF
 
-[[equipment.oscope]]
+[equipment.oscope]
 oscope_id = 1
 driver = sim
 resource = SIM::SCOPE1
@@ -373,7 +373,7 @@ resource = SIM::SCOPE1
 
 topic(
     ROOT / "digital" / "i2c",
-    "# [[io.i2c]]\n# i2c_id = 1",
+    "# [io.i2c]\n# i2c_id = 1",
     "I2C",
     "Level shifters if DUT is 1.8 V.",
     [
@@ -398,7 +398,7 @@ topic(
 
 topic(
     ROOT / "digital" / "spi",
-    "# [[io.spi]]\n# spi_id = 1",
+    "# [io.spi]\n# spi_id = 1",
     "SPI",
     "CS/MOSI/MISO/SCK pin map.",
     [
@@ -423,7 +423,7 @@ topic(
 
 topic(
     ROOT / "digital" / "jtag",
-    "# [[io.jtag]]\n# jtag_id = 1",
+    "# [io.jtag]\n# jtag_id = 1",
     "JTAG",
     "10-pin Cortex or custom header.",
     [
@@ -449,22 +449,22 @@ topic(
 # --- RF ---
 
 RF_BENCH = """
-[[equipment.vsg]]
+[equipment.vsg]
 vsg_id = 1
 driver = sim
 resource = SIM::VSG1
 
-[[equipment.speca]]
+[equipment.speca]
 speca_id = 1
 driver = sim
 resource = SIM::SA1
 
-[[equipment.vna]]
+[equipment.vna]
 vna_id = 1
 driver = sim
 resource = SIM::VNA1
 
-[[equipment.pwrmeter]]
+[equipment.pwrmeter]
 pwrmeter_id = 1
 driver = sim
 resource = SIM::PM1
@@ -472,7 +472,7 @@ resource = SIM::PM1
 
 topic(
     ROOT / "rf" / "allan_deviation",
-    "# [[equipment.fs740]]\n# fs740_id = 1",
+    "# [equipment.fs740]\n# fs740_id = 1",
     "RF Allan deviation",
     "FS740; 10 MHz ref; DUT LO input.",
     [
@@ -770,17 +770,17 @@ topic(
 # --- POWER ---
 
 PWR = """
-[[equipment.psu]]
+[equipment.psu]
 psu_id = 1
 driver = sim
 resource = SIM::PSU1
 
-[[equipment.eload]]
+[equipment.eload]
 eload_id = 1
 driver = sim
 resource = SIM::ELOAD1
 
-[[equipment.oscope]]
+[equipment.oscope]
 oscope_id = 1
 driver = sim
 resource = SIM::SCOPE1

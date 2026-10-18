@@ -1,6 +1,7 @@
 # Bench prerequisites
 
-Check memory, disk, Python version, and optionally VISA on the bench PC.
+**Start here** for host: check memory, disk, Python version, and optionally VISA
+on the bench PC.
 
 ## Plugins
 

@@ -1,5 +1,8 @@
 name = "power_acceptance"
 setup = []
-tests = ["../power/rail_voltage/test_rail_voltage.py"]
+# Same script can appear twice with different parameters= files after copy-out.
+tests = [
+  { path = "../power/rail_voltage/test_rail_voltage.py", parameters = "../power/rail_voltage/parameters.toml.example" },
+]
 teardown = []
 # fail_fast = true
