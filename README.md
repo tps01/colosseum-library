@@ -42,7 +42,8 @@ config TOML examples.
    `colosseum-core`, from GitHub Release wheels).
 5. Copy/fill `parameters.toml.example` → `parameters.toml` (or pass
    `--parameters`) where the procedure requires file-based limits; the rail
-   example requires them. Other inline limit arguments take precedence over a file.
+   example requires them. Matching fields in a parameters file override the same
+   limit arguments on the call.
 6. Run:
 
 ```sh

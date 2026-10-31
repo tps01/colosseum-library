@@ -60,7 +60,8 @@ def main() -> None:
         col.shared.wait(duration=dut_settle_s)
         col.equipment.dmm.measure_voltage(dmm_id=dmm_id, channel=dmm_channel, key="rail_v")
         # With --parameters / sibling parameters.toml, omit expected_val/tolerance here
-        # so the [rail_v] table fills them. Inline values win when both are present.
+        # so the [rail_v] table fills them. File fields override matching call kwargs
+        # when both are present.
         col.equipment.dmm.verify_voltage(key="rail_v")
     finally:
         col.equipment.psu.set_output(psu_id=psu_id, enabled=False)

@@ -1,5 +1,5 @@
 # Required: copy to parameters.toml (or pass --parameters) after fill-in.
-# Sections are evidence keys. Call kwargs still win over this file.
+# Sections are evidence keys. Fields in this file override matching call kwargs.
 
 [rail_v]
 expected_val = 3.3
