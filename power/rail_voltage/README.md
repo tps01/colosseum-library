@@ -29,7 +29,8 @@ the script.
 
 The script omits inline limits so the parameters file controls acceptance. For
 an inline-only variant, pass `expected_val=` and `tolerance=` to
-`verify_voltage`; those explicit values override the file when both are present.
+`verify_voltage`; matching fields in the parameters file override those call
+values when both are present.
 
 ## Run
 
