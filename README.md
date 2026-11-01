@@ -69,6 +69,7 @@ cannot silently measure the wrong thing.
 | `host/` | Bench-PC prerequisites and telemetry |
 | `gui/` | Product UI automation (`col.gui.web` / `col.gui.desktop`) |
 | `suites/` | Suite TOML templates that compose building blocks |
+| `tools/` | Helper scripts for Colosseum test development (e.g. release downloads) |
 
 Executable templates use `.py`; procedures needing unavailable APIs use
 `.py.design` and are not runnable. See [catalog readiness](docs/target_apis.md)
