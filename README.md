@@ -7,7 +7,7 @@ testware, not a `col.*` plugin: there is no installable package and no
 into your project and fill placeholders.
 
 Framework docs (install, runners, parameters, reports):
-https://tps01.github.io/colosseum-core/ — see **Testware library**.
+<https://tps01.github.io/colosseum-core/> — see **Testware library**.
 
 ## Recommended first copies
 
@@ -150,13 +150,13 @@ only after the method and prerequisites are defined and implemented.
 ## Numeric acceptance limits
 
 Catalog blocks using `verify_field(minimum=..., maximum=...)` require
-`colosseum-shared` **0.5.0 or newer** in the runner's environment. Bounds are
+`colosseum-shared` **0.8+** in the runner's environment. Bounds are
 inclusive and reject non-finite measurements. Use `expected_val` / `tolerance`
 for a target window, or `minimum` / `maximum` for limits; do not combine them.
 Signed dBc upper limits remain negative values; a more negative reading passes.
 Skew is bounded on both sides of zero. Limits are in the measurement's units.
 
-Transient and fresh power-sensor capture procedures require Equipment **0.5.0+**.
+Transient and fresh power-sensor capture procedures require Equipment **0.12+**.
 Copy topic folders with their companion helpers (`transient_response.py` or
 `two_tone.py`) where present; the helpers are local testware, not plugins.
 

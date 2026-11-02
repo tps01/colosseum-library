@@ -20,7 +20,7 @@ loss is 10 dB. For S11 [-1, -20] dB, worst return loss is 1 dB. Spot values rema
 signed, e.g. -10 dB, so their targets are not interchangeable with positive loss.
 Band tests target passive paths; active gain/compression requires its own method.
 
-Fill band/source/IF settings and copy this whole folder. Limits use Shared 0.5.0+.
+Fill band/source/IF settings and copy this whole folder. Limits use Shared 0.8+.
 `save_trace_data` obtains a fresh sweep; the band scripts verify finite data,
 point count, monotonic frequency and requested endpoints before deriving loss.
 Artifact-capable output is required for a new band capture; numeric verify-only

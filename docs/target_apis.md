@@ -5,7 +5,7 @@ its placeholders and establish its stated bench prerequisites. A `.py.design`
 file is a **non-executable design**, retained because it needs a supported acquisition/transport and measurement contract. Renaming a design or filling its values does not implement it.
 
 The executable templates have been checked against the current local core
-0.17.1, equipment 0.5.0, Shared 0.5.0, host 0.4.3, messaging 0.4.3 and GUI 0.3.3
+0.18.2, equipment 0.12.2, Shared 0.8.1, host 0.6.1, messaging 0.8.1 and GUI 0.4.1
 sources. This is an API check, not a claim of live-bench qualification.
 
 ## Implemented equivalents worth using

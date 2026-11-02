@@ -60,5 +60,5 @@ and an analyzer; VNA blocks need the calibrated VNA fixture. Unused FS740/ASG or
 other rows in neighboring reserved examples are not prerequisites for a simpler
 active block. Remove those rows rather than connecting unrelated equipment.
 
-Use Host **0.4.3+** for reliable PyVISA-sim identification: its native display
+Use Host **0.6+** for reliable PyVISA-sim identification: its native display
 string can omit `@sim`, so earlier Host versions can misclassify that backend.

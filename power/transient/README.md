@@ -1,6 +1,6 @@
 # Controlled load-transient response
 
-Requires Equipment **0.5.0+**, Shared **0.5.0+**, a qualified scope driver
+Requires Equipment **0.12+**, Shared **0.8+**, a qualified scope driver
 (`tektronix-mdo4000` has explicit nonblocking arming), and an eload supporting CC
 and controlled slew. Copy this whole folder including `transient_response.py`.
 These blocks own the PSU/load/scope and turn the PSU off and load off on exit.

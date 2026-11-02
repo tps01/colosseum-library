@@ -54,18 +54,13 @@ Only the following licenses are allowed:
 
 ## Packaging
 
-- Provide exactly one simple pip install that gets everything needed to develop
-  and run tests (for example `pip install -e .` or `pip install
-<this-package>`).
-- Do not split runtime drivers or developer/test tooling into optional extras
-  such as `[web]`, `[desktop]`, `[test]`, `[static]`, or `[docs]`. Put those
-  packages in the main `dependencies` list in `pyproject.toml`.
+- Installable Colosseum packages put runtime deps in `pyproject.toml` and
+  developer/test tooling in `requirements.txt` (no optional extras).
 - Platform- or Python-version environment markers on individual dependencies are
   fine when a package only applies on that platform.
 - This library is copy-out testware (not a pip package). When documenting
-  installs
-  for Colosseum plugins, point at that single full install - never optional
-extras.
+  installs for Colosseum plugins, distinguish wheel/runtime installs from
+  `pip install -r requirements.txt` for developers.
 
 ## Testing
 
