@@ -10,19 +10,20 @@ Each topic folder shares `config.toml.example` + `README.md`; each executable sc
 
 | Plugin | Used for |
 | --- | --- |
-| `colosseum-equipment` | `vsg`, `speca`, `vna`, `pwrmeter`, `fs740` (TDD) |
+| `colosseum-equipment` | `vsg`, `speca`, `vna`, `pwrmeter`, `fs740` (TDD), `gnss` |
 | `colosseum-shared` | Numeric acceptance, bounds and settling waits |
 
 See [catalog readiness](../docs/target_apis.md) for unavailable capabilities and
 reserved procedure designs.
 
-## Catalog (22 building blocks)
+## Catalog (26 building blocks)
 
 | Topic | Blocks | Folder |
 | --- | --- | --- |
 | Allan deviation | 1 | [allan_deviation/](allan_deviation/) |
 | Frequency / OBW | 3 | [frequency/](frequency/) |
 | Gain flatness | 1 | [gain_flatness/](gain_flatness/) |
+| GNSS receiver | 4 | [gnss_receiver/](gnss_receiver/) |
 | Harmonics | 3 | [harmonics/](harmonics/) |
 | Mask margin | 1 | [masking/](masking/) |
 | IP2 / IP3 / OIP3 | 4 | [ip2_ip3/](ip2_ip3/) |
@@ -34,6 +35,8 @@ reserved procedure designs.
 
 ### Suite examples
 
+- [suites/gnss_receiver.toml.example](../suites/gnss_receiver.toml.example) -
+  max C/N0, sats visible, TTFF, HDOP
 - [suites/rf_passband.toml.design](../suites/rf_passband.toml.design) - S21,
   S11, gain flatness
 - [suites/rf_linearity.toml.design](../suites/rf_linearity.toml.design) -

@@ -1,0 +1,8 @@
+# Live GNSS receiver (no sim driver). Copy to config.toml and set the serial port.
+# Omit model so open-time MON-VER probing can select ublox-m9 (or another series).
+# Live setup notes: ../../docs/bench_modes.md
+[equipment.gnss]
+gnss_id = 1
+port = "COM1"
+baudrate = 9600
+timeout = 5.0

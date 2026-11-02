@@ -24,6 +24,7 @@ for mixed suites (DIO + host + instruments).
 | `power_dynamic.toml.example` | eload + transient (4 blocks) |
 | `digital_gpio_bench.toml.design` | GPIO output + rise time |
 | `digital_bringup.toml.example` | GPIO + loopback + ethernet link |
+| `gnss_receiver.toml.example` | max C/N0, sats visible, TTFF, HDOP |
 | `rf_passband.toml.design` | S21 max, S11 max, gain flatness |
 | `rf_linearity.toml.design` | P1dB, IM3, OIP3 |
 | `rf_amplifier.toml.design` | broader RF acceptance (6 blocks) |
