@@ -1,4 +1,4 @@
-"""One-shot load responses; Equipment 0.5.0+ and Shared 0.5.0+.
+"""One-shot load responses; Equipment 0.12+ and Shared 0.8+.
 
 Rail and current-monitor CSVs must be from the same acquisition. Event time is
 the measured load-current threshold crossing, not the host command timestamp.

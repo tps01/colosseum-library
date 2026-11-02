@@ -1,5 +1,5 @@
 """undershoot_mv: measured rail response to one controlled load step.
-Requires Equipment 0.5.0+, Shared 0.5.0+, and the companion transient_response.py.
+Requires Equipment 0.12+, Shared 0.8+, and the companion transient_response.py.
 Wire PSU -> DUT input, eload -> DUT output, scope rail probe -> DUT output and
 current monitor -> actual load current. See README for the event/metric contract.
 """

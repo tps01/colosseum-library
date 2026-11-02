@@ -12,7 +12,7 @@ Sensor at test frequency.
 
 ## Peak versus average and fresh acquisition
 
-Peak/average blocks require Equipment **0.5.0+**. Connect DUT RF OUT through the
+Peak/average blocks require Equipment **0.12+**. Connect DUT RF OUT through the
 qualified attenuator/DC block (where required) to the sensor; define DUT output
 as the reference plane. The peak block's `path_loss_db` is positive path loss,
 added by sensor correction. Zero/calibrate beforehand without RF as specified
