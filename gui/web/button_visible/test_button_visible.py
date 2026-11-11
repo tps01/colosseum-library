@@ -35,9 +35,14 @@ def _load_bench() -> None:
     col.config.load_config(str(Path(__file__).with_name("config.toml")))
 
 
+timeout_s = FILL_IN_HERE  # bounded business-status wait
+
+
 def main() -> None:
     _load_bench()
+    col.gui.web.wait(web_id=web_id, until="enabled", timeout_s=timeout_s, role=button_role, name=button_name)
     col.gui.web.click(web_id=web_id, role=button_role, name=button_name)
+    col.gui.web.wait(web_id=web_id, until="visible", timeout_s=timeout_s, role=status_role, name=status_name)
     col.gui.web.verify_visible(
         web_id=web_id, key="status_visible", role=status_role, name=status_name
     )

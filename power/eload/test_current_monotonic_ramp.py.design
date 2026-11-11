@@ -1,0 +1,9 @@
+"""RESERVED DESIGN: Independent timestamped current and compliance evidence.
+
+Not executable testware. The speculative implementation was retired.
+Required method, evidence, units, prerequisites and promotion criteria:
+../../docs/measurement_contracts.md#timing-and-electrical-measurements
+
+Choose a supported transport/acquisition API before implementing this contract.
+Filling placeholders or renaming a proposed method cannot supply that capability.
+"""

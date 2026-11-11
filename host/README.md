@@ -2,6 +2,8 @@
 
 Bench-PC prerequisites and local telemetry (`col.host.*`).
 
+**Start here:** [bench_prerequisites/](bench_prerequisites/) (plugin-light smoke).
+
 ## Plugins
 
 | Plugin | Used for |

@@ -47,7 +47,7 @@ def main() -> None:
     col.host.system.measure_python_version(key="py")
     col.host.system.verify_python_version(key="py", version_prefix=python_version_prefix)
     col.host.bench.measure_visa_backend(key="visa")
-    col.host.bench.verify_visa_available(key="visa", allow_sim=True, optional=not require_visa)
+    col.host.bench.verify_visa_available(key="visa", allow_sim=not require_visa, optional=not require_visa)
 
 
 if __name__ == "__main__":

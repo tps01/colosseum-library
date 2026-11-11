@@ -1,3 +1,9 @@
+# One fixed PSU -> DUT IN, DMM/load/rail probe -> DUT OUT fixture.
+# A calibrated load-current monitor feeds the scope's second channel.
+# Every block owns a complete PSU/load cycle and cleans up in finally.
+# Use one explicit merged bench config (power/eload/config.toml.example has
+# the instrument categories); fill matching IDs/settings in all four blocks.
+# No output state is inherited. DUT must tolerate four independent power cycles.
 name = "power_dynamic"
 setup = []
 tests = [

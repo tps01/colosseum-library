@@ -1,3 +1,6 @@
+# SIMULATION DEFAULT: generated responses are not DUT evidence.
+# Change the driver AND endpoint for live use; changing resource alone keeps sim.
+# Live setup and required rows: ../../docs/bench_modes.md
 [equipment.psu]
 psu_id = 1
 driver = sim
@@ -12,3 +15,8 @@ resource = SIM::ELOAD1
 oscope_id = 1
 driver = sim
 resource = SIM::SCOPE1
+
+[equipment.dmm]
+dmm_id = 1
+driver = sim
+resource = SIM::DMM1

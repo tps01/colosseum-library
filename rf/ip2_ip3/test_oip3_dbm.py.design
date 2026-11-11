@@ -1,0 +1,9 @@
+"""RESERVED DESIGN: Qualified balanced-tone carriers and both IM3 products.
+
+Not executable testware. The speculative implementation was retired.
+Required method, evidence, units, prerequisites and promotion criteria:
+../../docs/measurement_contracts.md#rf-analysis
+
+Choose a supported transport/acquisition API before implementing this contract.
+Filling placeholders or renaming a proposed method cannot supply that capability.
+"""

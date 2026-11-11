@@ -1,3 +1,4 @@
+# Read-only host checks: no DUT stimulus or fixture setup/cleanup is owned.
 name = "host_smoke"
 setup = []
 tests = ["../host/bench_prerequisites/test_bench_prerequisites.py"]

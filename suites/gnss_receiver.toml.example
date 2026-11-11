@@ -1,0 +1,13 @@
+# Live GNSS receiver acceptance. Copy topic folder + this suite; fill
+# rf/gnss_receiver FILL_IN_HERE and config.toml (port, baud; omit model).
+# Order: stream/sky checks before acquisition/HDOP.
+name = "gnss_receiver"
+setup = []
+tests = [
+  "../rf/gnss_receiver/test_max_cn0_dbhz.py",
+  "../rf/gnss_receiver/test_satellites_visible.py",
+  "../rf/gnss_receiver/test_ttff_s.py",
+  "../rf/gnss_receiver/test_hdop.py",
+]
+teardown = []
+# fail_fast = true

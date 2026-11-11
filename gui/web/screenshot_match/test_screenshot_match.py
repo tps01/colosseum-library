@@ -34,8 +34,12 @@ def _load_bench() -> None:
     col.config.load_config(str(Path(__file__).with_name("config.toml")))
 
 
+settle_timeout_s = FILL_IN_HERE  # bounded best-effort rendering wait
+
+
 def main() -> None:
     _load_bench()
+    col.gui.web.wait_stable(web_id=web_id, timeout_s=settle_timeout_s)
     col.gui.web.capture_screenshot(web_id=web_id, path=screenshot_path)
     col.gui.web.verify_visual(
         key="visual",

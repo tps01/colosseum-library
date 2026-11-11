@@ -23,6 +23,8 @@ USE_AUTOCONFIG = False
 desktop_id = FILL_IN_HERE  # int
 automation_id = FILL_IN_HERE  # str; UIA AutomationId
 expected_text = FILL_IN_HERE  # str; text after click
+status_automation_id = FILL_IN_HERE  # distinct result/status control
+timeout_s = FILL_IN_HERE
 
 
 def _load_bench() -> None:
@@ -33,12 +35,14 @@ def _load_bench() -> None:
 
 def main() -> None:
     _load_bench()
+    col.gui.desktop.wait(desktop_id=desktop_id, until="enabled", timeout_s=timeout_s, automation_id=automation_id)
     col.gui.desktop.click(desktop_id=desktop_id, automation_id=automation_id)
+    col.gui.desktop.wait(desktop_id=desktop_id, until="text", timeout_s=timeout_s, automation_id=status_automation_id, text=expected_text)
     col.gui.desktop.verify_text(
         desktop_id=desktop_id,
         key="after_click",
         expected=expected_text,
-        automation_id=automation_id,
+        automation_id=status_automation_id,
     )
 
 

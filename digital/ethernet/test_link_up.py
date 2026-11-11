@@ -7,18 +7,18 @@ from pathlib import Path
 import colosseum as col
 
 # SETUP:
-#   Cable to DUT NIC.
+#   Local bench NIC cabled to the DUT NIC; this reads the bench interface, not the DUT.
 
 USE_AUTOCONFIG = False
 
 # --- procedure (replace every FILL_IN_HERE) ---
-dut_iface = FILL_IN_HERE  # str e.g. eth0
+local_iface = FILL_IN_HERE  # str e.g. eth0
 
 
 def main() -> None:
     _load_bench()
-    col.host.net.measure_operstate(key="link", iface=dut_iface)
-    col.host.net.verify_operstate_up(key="link", expected="up")
+    col.host.net.measure_operstate(key="link", iface=local_iface)
+    col.host.net.verify_operstate_up(key="link")
 
 
 def _load_bench() -> None:

@@ -1,3 +1,9 @@
+# One live Windows FlaUI desktop config for BOTH tests; sim is rehearsal only.
+# Start/reset the application to its pre-click state before EACH suite run.
+# Select a separate result/status control and a reviewed post-click baseline.
+# The first block waits for its status; the second confirms the resulting view.
+# Application lifetime/reset is externally owned. Empty setup/teardown below
+# intentionally do not launch, reset or close an application.
 # Skeleton for a desktop GUI smoke suite. Copy beside your project (or keep
 # relative paths into this library) and fill FILL_IN_HERE in each test.
 #

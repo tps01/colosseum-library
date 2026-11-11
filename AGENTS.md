@@ -12,6 +12,7 @@ the user explicitly requests it.
   `host/`, `gui/`)
 - optional per-test `config.toml.example` files
 - suite TOML templates under `suites/`
+- helper scripts under `tools/` for Colosseum test development
 - `_template/` as the pattern for new tests
 
 It must **not**:

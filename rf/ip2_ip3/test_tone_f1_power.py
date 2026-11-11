@@ -1,33 +1,49 @@
-"""One block: tone f1 power."""
+"""tone_f1_power: two CW generators -> isolated combiner -> DUT -> analyzer.
 
+Requires Equipment + Shared and a powered, enabled DUT. Copy this topic including
+two_tone.py. Set generator-port levels with measured path loss; verify source and
+analyzer linearity independently before calling the result DUT IM3.
+"""
 from __future__ import annotations
-
 from pathlib import Path
-
+from math import isfinite
 import colosseum as col
+from two_tone import prepare_two_tone, capture_component
 
-# SETUP:
-#   Dual-tone stimulus active.
-
-USE_AUTOCONFIG = True
-
-# --- procedure (replace every FILL_IN_HERE) ---
-vsg_id = FILL_IN_HERE
+USE_AUTOCONFIG = False
+vsg1_id = FILL_IN_HERE
+vsg2_id = FILL_IN_HERE
 speca_id = FILL_IN_HERE
 f1_hz = FILL_IN_HERE
+f2_hz = FILL_IN_HERE
+power1_dbm = FILL_IN_HERE  # generator 1 port dBm
+power2_dbm = FILL_IN_HERE  # generator 2 port dBm
+span_hz = FILL_IN_HERE  # Hz; isolate the desired component
+rbw_hz = FILL_IN_HERE  # Hz; resolve nearby tones
+vbw_hz = FILL_IN_HERE  # Hz
+analyzer_attenuation_db = FILL_IN_HERE  # dB; avoid analyzer-generated distortion
+reference_level_dbm = FILL_IN_HERE  # dBm; no clipping/overload
+settle_s = FILL_IN_HERE  # seconds after source/receiver changes
 expected_f1_dbm = FILL_IN_HERE
 tolerance_db = FILL_IN_HERE
 
 
 def main() -> None:
+    if not isfinite(span_hz) or not 0 < span_hz < f2_hz - f1_hz:
+        raise ValueError("Span must isolate a component: 0 < span < f2 - f1")
     _load_bench()
-    col.equipment.vsg.set_multicarrier(vsg_id=vsg_id, num_tones=2, spacing_hz=1e6)
-    col.equipment.vsg.set_frequency(vsg_id=vsg_id, frequency=f1_hz)
-    col.equipment.vsg.set_output(vsg_id=vsg_id, enabled=True)
-    col.equipment.speca.set_center_frequency(speca_id=speca_id, frequency=f1_hz)
-    col.equipment.speca.peak_search(speca_id=speca_id, marker=1)
-    col.equipment.speca.measure_marker_power(speca_id=speca_id, marker=1, key="f1_dbm")
-    col.equipment.speca.verify_marker_power(key="f1_dbm", expected_val=expected_f1_dbm, tolerance=tolerance_db)
+    try:
+        col.equipment.vsg.set_output(vsg_id=vsg1_id, enabled=False)
+        col.equipment.vsg.set_output(vsg_id=vsg2_id, enabled=False)
+        prepare_two_tone(vsg1_id=vsg1_id, vsg2_id=vsg2_id, f1_hz=f1_hz, f2_hz=f2_hz, power1_dbm=power1_dbm, power2_dbm=power2_dbm)
+        capture_component(speca_id=speca_id, frequency_hz=f1_hz, span_hz=span_hz, rbw_hz=rbw_hz, vbw_hz=vbw_hz, attenuation_db=analyzer_attenuation_db, reference_dbm=reference_level_dbm, settle_s=settle_s)
+        col.equipment.speca.measure_marker_power(speca_id=speca_id, marker=1, key="f1_dbm")
+        col.equipment.speca.verify_marker_power(key="f1_dbm", expected_val=expected_f1_dbm, tolerance=tolerance_db)
+    finally:
+        try:
+            col.equipment.vsg.set_output(vsg_id=vsg1_id, enabled=False)
+        finally:
+            col.equipment.vsg.set_output(vsg_id=vsg2_id, enabled=False)
 
 
 def _load_bench() -> None:

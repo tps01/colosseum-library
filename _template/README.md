@@ -16,4 +16,17 @@ user's project copy.
 5. `if __name__ == "__main__": main(); col.endex()`.
 6. Optional `config.toml.example` using real plugin section names only
    (`[[equipment.*]]`, `[io.dio]`, … - never `[library.*]`).
-7. Short `README.md` in the test folder listing FILL_IN_HERE keys and plugins.
+7. Optional `parameters.toml.example` for limit kwargs by evidence `key=`
+   (sibling `parameters.toml`, suite entry `parameters=`, or CLI `--parameters`).
+8. Short `README.md` in the test folder listing FILL_IN_HERE keys and plugins.
+9. Document optional `--report wats` / `--report junit` in the run section when
+   useful; do not invent library-owned report switches.
+
+## Procedure contract before copy-out
+
+Include a terminal/signal connection map (stimulus -> DUT -> receiver, plus
+returns/references), required plugins and supported model capabilities, DUT
+power/firmware/control mode and external services. Define calibration/reference
+planes, units/statistic/acceptance, acquisition ordering and output ownership.
+Separate fixture self-tests from DUT behavior and identify evidence that rejects
+missing stimulus. Name any required companion files and parameter-file limits.

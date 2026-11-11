@@ -81,3 +81,9 @@ Desktop.ini
 
 # Local notes and agent scratch
 scratchpad/
+
+# tools/ download_releases.ps1 artifacts (keep scripts tracked)
+tools/*.whl
+tools/*.vsix
+tools/*.tar.gz
+tools/*.zip
