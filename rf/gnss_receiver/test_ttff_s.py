@@ -43,12 +43,12 @@ def _load_bench() -> None:
 
 def main() -> None:
     _load_bench()
-    col.equipment.gnss.start_logging(gnss_id=gnss_id, path="gnss/ttff.nmea", key="ttff")
+    col.equipment.gnss.start_logging(gnss_id=gnss_id, path="gnss/ttff.nmea", key="ttff", messages="default")
     try:
         col.equipment.gnss.mark_acquisition_start(gnss_id=gnss_id)
         col.equipment.gnss.wait_for_fix(gnss_id=gnss_id, timeout_s=fix_timeout_s)
         col.equipment.gnss.measure_ttff_s(gnss_id=gnss_id, key="ttff")
-        col.shared.verify.verify_field(key="ttff", maximum=max_ttff_s)
+        col.equipment.gnss.verify_ttff_s(key="ttff", limit=max_ttff_s)
         col.equipment.gnss.get_fix_type(gnss_id=gnss_id)
     finally:
         col.equipment.gnss.stop_logging(gnss_id=gnss_id)

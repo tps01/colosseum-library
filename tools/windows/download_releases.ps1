@@ -1,9 +1,9 @@
 # Download latest Colosseum core / plugin wheels and linter VSIX from GitHub Releases.
-# Uses only built-in PowerShell (no gh CLI). Assets land next to this script.
+# Uses only built-in PowerShell (no gh CLI). Assets land in the shared tools directory.
 
 $ErrorActionPreference = 'Stop'
 
-$OutDir = $PSScriptRoot
+$OutDir = Split-Path -Parent $PSScriptRoot
 $Headers = @{
     'User-Agent' = 'colosseum-download-releases'
     'Accept'     = 'application/vnd.github+json'

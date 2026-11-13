@@ -1,14 +1,14 @@
 # Create a .venv next to this script and pip-install local Colosseum release wheels.
-# Expects wheels from download_releases.ps1 in the same folder. Uses `python` on PATH.
+# Expects wheels from download_releases.ps1 in the shared tools folder. Uses `python` on PATH.
 
 $ErrorActionPreference = 'Stop'
 
-$Dir = $PSScriptRoot
-$VenvPath = Join-Path $Dir '.venv'
+$Dir = Split-Path -Parent $PSScriptRoot
+$VenvPath = Join-Path $PSScriptRoot '.venv'
 $Wheels = @(Get-ChildItem -Path $Dir -Filter '*.whl' -File | Sort-Object Name)
 
 if ($Wheels.Count -eq 0) {
-    throw "No .whl files found in $Dir. Run download_releases.ps1 first."
+    throw "No .whl files found in $Dir. Run windows\download_releases.ps1 first."
 }
 
 $PythonCmd = Get-Command python -ErrorAction SilentlyContinue

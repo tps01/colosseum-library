@@ -35,5 +35,7 @@ python -m pytest tools/test_mask_editor.py
 
 ## Release helpers
 
-`download_releases.ps1` and `install_releases.ps1` help obtain and install
-Colosseum release packages. See each script's help for options.
+Use `windows/download_releases.ps1` and `windows/install_releases.ps1` on
+Windows, or `linux/download_releases.sh` and `linux/install_releases.sh` on
+Linux. The download helpers save assets in `tools/`; the install helpers create
+an OS-specific virtual environment in their respective platform directory.

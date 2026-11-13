@@ -70,6 +70,8 @@ cannot silently measure the wrong thing.
 | `gui/` | Product UI automation (`col.gui.web` / `col.gui.desktop`) |
 | `suites/` | Suite TOML templates that compose building blocks |
 | [`tools/`](tools/README.md) | Offline mask editor and helper scripts for Colosseum test development |
+| `tools/windows/` | PowerShell release download and install helpers |
+| `tools/linux/` | Bash release download and install helpers |
 
 Executable templates use `.py`; procedures needing unavailable APIs use
 `.py.design` and are not runnable. See [catalog readiness](docs/target_apis.md)
@@ -80,6 +82,10 @@ establish bench readiness.
 Each **topic folder** is self-contained: shared `config.toml.example`,
 `README.md` (block index), and one `test_<measure>.py` per building block (one
 measurement + one verify). Copy a topic folder or chain blocks via suite TOML.
+
+## Release helper scripts
+
+Use `tools/windows/` on Windows or `tools/linux/` on Linux. The download scripts save release assets in the shared `tools/` directory; each install script creates an OS-specific virtual environment beside itself.
 
 ## Autoconfig vs TOML
 

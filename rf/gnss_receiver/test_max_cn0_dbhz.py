@@ -42,7 +42,7 @@ def _load_bench() -> None:
 
 def main() -> None:
     _load_bench()
-    col.equipment.gnss.start_logging(gnss_id=gnss_id, path="gnss/max_cn0.nmea", key="max_cn0")
+    col.equipment.gnss.start_logging(gnss_id=gnss_id, path="gnss/max_cn0.nmea", key="max_cn0", messages="default")
     try:
         col.shared.wait(duration=soak_s)
         col.equipment.gnss.get_constellations_present(gnss_id=gnss_id)
@@ -51,6 +51,7 @@ def main() -> None:
         col.equipment.gnss.measure_max_cn0_dbhz(gnss_id=gnss_id, key="max_cn0")
         col.equipment.gnss.verify_max_cn0_dbhz(key="max_cn0", limit=min_cn0_dbhz)
         col.equipment.gnss.save_skyplot(gnss_id=gnss_id, path="gnss/max_cn0_sky.png")
+        col.equipment.gnss.save_signal_levels_plot(gnss_id=gnss_id, path="gnss/max_cn0_signals.png")
         col.equipment.gnss.save_quality_plot(gnss_id=gnss_id, path="gnss/max_cn0_quality.png")
     finally:
         col.equipment.gnss.stop_logging(gnss_id=gnss_id)

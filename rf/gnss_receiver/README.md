@@ -7,10 +7,15 @@ repeater. Instrument APIs live in `colosseum-equipment` (`col.equipment.gnss`).
 
 | Script | Primary quantity |
 | --- | --- |
-| `test_max_cn0_dbhz.py` | max C/N0 (dB-Hz) lower bound |
-| `test_satellites_visible.py` | satellites visible lower bound |
+| `test_max_cn0_dbhz.py` | max C/N0 (dB-Hz) lower bound (+ sky / signal plots) |
+| `test_satellites_visible.py` | satellites visible lower bound (+ sky / signal plots) |
 | `test_ttff_s.py` | TTFF after `mark_acquisition_start` upper bound |
-| `test_hdop.py` | HDOP upper bound (with position / plot evidence) |
+| `test_hdop.py` | HDOP upper bound (+ track / deviation / sky / quality plots) |
+
+Plots use the equipment GNSS writers (`save_skyplot`, `save_signal_levels_plot`,
+`save_track_plot`, `save_deviation_plot`, `save_quality_plot`). Logging uses
+`messages="default"` (PVT/DOP/GSV). For field/sat multi-row verifies, raise the
+profile to `field`, `sat`, or `all` on `start_logging`.
 
 Suite template: [`suites/gnss_receiver.toml.example`](../../suites/gnss_receiver.toml.example)
 (CN0 → sats → TTFF → HDOP).
@@ -33,6 +38,7 @@ Suggested first-fill values (tune to the antenna / environment):
 | `min_cn0_dbhz` | `20` |
 | `min_sats_visible` | `4` |
 | `fix_timeout_s` / `max_ttff_s` | `120` |
+| `track_soak_s` | `2` |
 | `max_hdop` | `5` |
 
 Default baud in the example config is **9600**. If the receiver was moved to

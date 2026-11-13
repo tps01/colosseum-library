@@ -41,13 +41,14 @@ def _load_bench() -> None:
 
 def main() -> None:
     _load_bench()
-    col.equipment.gnss.start_logging(gnss_id=gnss_id, path="gnss/sats_visible.nmea", key="sats_visible")
+    col.equipment.gnss.start_logging(gnss_id=gnss_id, path="gnss/sats_visible.nmea", key="sats_visible", messages="default")
     try:
         col.shared.wait(duration=soak_s)
         col.equipment.gnss.get_satellite_snapshot(gnss_id=gnss_id)
         col.equipment.gnss.measure_satellites_visible(gnss_id=gnss_id, key="sats_visible")
-        col.shared.verify.verify_field(key="sats_visible", minimum=min_sats_visible)
+        col.equipment.gnss.verify_satellites_visible(key="sats_visible", limit=min_sats_visible)
         col.equipment.gnss.save_skyplot(gnss_id=gnss_id, path="gnss/sats_visible_sky.png")
+        col.equipment.gnss.save_signal_levels_plot(gnss_id=gnss_id, path="gnss/sats_visible_signals.png")
     finally:
         col.equipment.gnss.stop_logging(gnss_id=gnss_id)
 
