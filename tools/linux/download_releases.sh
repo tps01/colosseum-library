@@ -19,6 +19,7 @@ headers = {
 }
 targets = [
     ("tps01/colosseum-core", "colosseum_core-*-py3-none-any.whl"),
+    ("tps01/colosseum-extensions", "colosseum_extensions-*-py3-none-any.whl"),
     ("tps01/colosseum-shared", "colosseum_shared-*-py3-none-any.whl"),
     ("tps01/colosseum-gui", "colosseum_gui-*-py3-none-any.whl"),
     ("tps01/colosseum-host", "colosseum_host-*-py3-none-any.whl"),

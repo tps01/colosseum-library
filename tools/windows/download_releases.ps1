@@ -43,6 +43,7 @@ function Save-ReleaseAsset {
 
 $targets = @(
     @{ Repo = 'tps01/colosseum-core';       Pattern = 'colosseum_core-*-py3-none-any.whl' }
+    @{ Repo = 'tps01/colosseum-extensions'; Pattern = 'colosseum_extensions-*-py3-none-any.whl' }
     @{ Repo = 'tps01/colosseum-shared';     Pattern = 'colosseum_shared-*-py3-none-any.whl' }
     @{ Repo = 'tps01/colosseum-gui';        Pattern = 'colosseum_gui-*-py3-none-any.whl' }
     @{ Repo = 'tps01/colosseum-host';       Pattern = 'colosseum_host-*-py3-none-any.whl' }
