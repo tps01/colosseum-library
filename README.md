@@ -70,7 +70,7 @@ cannot silently measure the wrong thing.
 | `gui/` | Product UI automation (`col.gui.web` / `col.gui.desktop`) |
 | `suites/` | Suite TOML templates that compose building blocks |
 | [`tools/`](tools/README.md) | Offline mask editor and helper scripts for Colosseum test development |
-| `tools/windows/` | PowerShell release download and install helpers |
+| `tools/windows/` | PowerShell and batch release download and install helpers |
 | `tools/linux/` | Bash release download and install helpers |
 
 Executable templates use `.py`; procedures needing unavailable APIs use

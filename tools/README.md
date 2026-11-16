@@ -39,3 +39,7 @@ Use `windows/download_releases.ps1` and `windows/install_releases.ps1` on
 Windows, or `linux/download_releases.sh` and `linux/install_releases.sh` on
 Linux. The download helpers save assets in `tools/`; the install helpers create
 an OS-specific virtual environment in their respective platform directory.
+
+From Windows Command Prompt, run `windows\download_releases.bat` followed by
+`windows\install_releases.bat`. These launch the adjacent PowerShell scripts
+using Windows PowerShell; keep each `.bat` beside its matching `.ps1` when copying.

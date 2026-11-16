@@ -1,4 +1,4 @@
-# Download latest Colosseum core / plugin wheels and linter VSIX from GitHub Releases.
+# Download latest Colosseum core / plugin wheels from GitHub Releases.
 # Uses only built-in PowerShell (no gh CLI). Assets land in the shared tools directory.
 
 $ErrorActionPreference = 'Stop'
@@ -49,7 +49,6 @@ $targets = @(
     @{ Repo = 'tps01/colosseum-host';       Pattern = 'colosseum_host-*-py3-none-any.whl' }
     @{ Repo = 'tps01/colosseum-messaging';  Pattern = 'colosseum_messaging-*-py3-none-any.whl' }
     @{ Repo = 'tps01/colosseum-equipment';  Pattern = 'colosseum_equipment-*-py3-none-any.whl' }
-    @{ Repo = 'tps01/colosseum-linter';     Pattern = 'colosseum-linter-*.vsix' }
 )
 
 foreach ($t in $targets) {

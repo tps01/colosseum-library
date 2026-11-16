@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Download latest Colosseum release wheels and linter VSIX from GitHub Releases.
+# Download latest Colosseum release wheels from GitHub Releases.
 # Requires python3. Assets are saved in the shared tools directory.
 set -euo pipefail
 
@@ -25,7 +25,6 @@ targets = [
     ("tps01/colosseum-host", "colosseum_host-*-py3-none-any.whl"),
     ("tps01/colosseum-messaging", "colosseum_messaging-*-py3-none-any.whl"),
     ("tps01/colosseum-equipment", "colosseum_equipment-*-py3-none-any.whl"),
-    ("tps01/colosseum-linter", "colosseum-linter-*.vsix"),
 ]
 
 for repo, pattern in targets:
