@@ -3,6 +3,8 @@
 Copy a `*.toml.example` to your project (drop the `.example` suffix) **together
 with** the test folders it lists. Suite paths are relative to the suite file.
 
+See [bench setup diagrams](../docs/bench_setups.md) for the six runnable suites.
+
 ## Run
 
 ```sh
@@ -46,8 +48,8 @@ After copy-out, rename `parameters.toml.example` → `parameters.toml` (or point
 
 Only `.toml.example` files are runnable suite templates. `.toml.design` files
 retain the proposed compositions for review and must not be passed to run-suite.
-Their `.py.design` dependencies are not executable. Fill-in values cannot supply
-missing instrument capabilities. See [readiness](../docs/target_apis.md).
+The composition sketches still need fixture, routing or stimulus workflows.
+See [readiness](../docs/target_apis.md).
 
 ## Fixture and state contracts
 

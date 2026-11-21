@@ -8,7 +8,7 @@ Fan connector pinout; PWM/tach on scope channel.
 | --- | --- |
 | `test_fan_command_ack.py` | fan command → ack |
 | `test_pwm_frequency.py` | PWM freq → expected |
-| `test_pwm_duty_cycle.py.design` (reserved) | duty cycle → tolerance |
+| `test_pwm_duty_cycle.py` | duty cycle → tolerance |
 | `test_tachometer_rpm.py` | tach RPM → limit |
 
 The fan acknowledgement command must exit 0 and print exactly `OK` (surrounding
@@ -30,4 +30,12 @@ does not prove that a fan is spinning. Document any required tach pull-up.
 
 ## Bench hookup and prerequisites
 
-Plugins: Equipment + Shared for scope/tach; Messaging for fan acknowledgement. Scope tip -> PWM or tach signal, reference -> compatible DUT return. Map fan supply, return, PWM input and tach output separately; provide a correctly referenced tach pull-up where required. Establish DUT/fan power, command setpoint and steady operating state, and obtain pulses/revolution from the actual fan. ACK alone does not prove speed. Duty-cycle measurement remains reserved.
+Plugins: Equipment + Shared for scope/tach; Messaging for fan acknowledgement. Scope tip -> PWM or tach signal, reference -> compatible DUT return. Map fan supply, return, PWM input and tach output separately; provide a correctly referenced tach pull-up where required. Establish DUT/fan power, command setpoint and steady operating state, and obtain pulses/revolution from the actual fan. ACK alone does not prove speed. The duty-cycle reference uses a scope waveform with multiple complete PWM cycles.
+
+## Reference setup
+
+Follow the [copy-out instructions](../../docs/reference_tests.md). This topic uses [reference_common.py](../../reference_common.py), [digital/waveform_reference.py](../../digital/waveform_reference.py). Fill `SETTINGS` for the selected fixture.
+
+| Procedure | Fixture |
+| --- | --- |
+| [pwm duty cycle](test_pwm_duty_cycle.py) | Prepare repetitive active-high PWM and the required pull-up. Measure multiple complete cycles. |

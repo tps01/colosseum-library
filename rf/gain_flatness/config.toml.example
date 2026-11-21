@@ -1,22 +1,6 @@
-# SIMULATION DEFAULT: generated responses are not DUT evidence.
-# Change the driver AND endpoint for live use; changing resource alone keeps sim.
-# Live setup and required rows: ../../docs/bench_modes.md
-[equipment.vsg]
-vsg_id = 1
-driver = sim
-resource = SIM::VSG1
-
-[equipment.speca]
-speca_id = 1
-driver = sim
-resource = SIM::SA1
-
+# Fill resources and models using the qualified bench layout.
 [equipment.vna]
 vna_id = 1
-driver = sim
-resource = SIM::VNA1
-
-[equipment.pwrmeter]
-pwrmeter_id = 1
-driver = sim
-resource = SIM::PM1
+driver = "visa"
+resource = "FILL_IN_HERE"
+model = "FILL_IN_HERE"

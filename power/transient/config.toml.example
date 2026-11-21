@@ -3,15 +3,15 @@
 # Live setup and required rows: ../../docs/bench_modes.md
 [equipment.psu]
 psu_id = 1
-driver = sim
-resource = SIM::PSU1
+driver = "sim"
+resource = "SIM::PSU1"
 
 [equipment.eload]
 eload_id = 1
-driver = sim
-resource = SIM::ELOAD1
+driver = "sim"
+resource = "SIM::ELOAD1"
 
 [equipment.oscope]
 oscope_id = 1
-driver = sim
-resource = SIM::SCOPE1
+driver = "sim"
+resource = "SIM::SCOPE1"

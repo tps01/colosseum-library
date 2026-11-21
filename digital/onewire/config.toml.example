@@ -1,7 +1,19 @@
-# SIMULATION DEFAULT: generated responses are not DUT evidence.
-# Change the driver AND endpoint for live use; changing resource alone keeps sim.
-# Live setup and required rows: ../../docs/bench_modes.md
+# Fill resources and models using the qualified bench layout.
+[io.onewire]
+onewire_id = 1
+driver = "maxim-ds9481r"
+port = "FILL_IN_HERE"
+speed = "standard"
+
+# Brownout procedure only
 [equipment.psu]
 psu_id = 1
-driver = sim
-resource = SIM::PSU1
+driver = "visa"
+resource = "FILL_IN_HERE"
+model = "FILL_IN_HERE"
+
+[equipment.oscope]
+oscope_id = 1
+driver = "visa"
+resource = "FILL_IN_HERE"
+model = "FILL_IN_HERE"

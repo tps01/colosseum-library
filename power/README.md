@@ -11,7 +11,7 @@ Atomic PSU, DMM, eload, and transient-response building blocks.
 | `colosseum-equipment` | PSU, DMM, eload and scope acquisition |
 | `colosseum-shared` | Numeric acceptance, bounds and settling waits |
 
-See [docs/target_apis.md](../docs/target_apis.md) for TDD specifications.
+See the [measurement contracts](../docs/measurement_contracts.md) for evidence requirements.
 
 ## Catalog (6 building blocks)
 
@@ -27,6 +27,3 @@ See [docs/target_apis.md](../docs/target_apis.md) for TDD specifications.
   - steady rail check
 - [suites/power_dynamic.toml.example](../suites/power_dynamic.toml.example) -
   load step + transient
-
-Rows labeled **reserved** refer to `.py.design` procedure proposals, not runnable
-tests. See [catalog readiness](../docs/target_apis.md) before copying a block.

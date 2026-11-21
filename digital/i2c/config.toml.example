@@ -1,4 +1,16 @@
-# Select actual drivers/models/addresses; example values do not qualify a bench.
-# Live setup and required rows: ../../docs/bench_modes.md
-# [io.i2c]
-# i2c_id = 1
+# Fill resources and models using the qualified bench layout.
+[io.i2c]
+i2c_id = 1
+driver = "totalphase-aardvark"
+resource = "FILL_IN_HERE"
+pullup = false
+target_power = false
+
+[io.analyzer]
+analyzer_id = 1
+driver = "totalphase-beagle"
+model = "i2c-spi"
+protocol = "i2c"
+resource = "FILL_IN_HERE"
+pullup = false
+target_power = false

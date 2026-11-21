@@ -8,7 +8,7 @@ Sensor at test frequency.
 | --- | --- |
 | `test_avg_power_dbm.py` | avg power → window |
 | `test_peak_power_dbm.py` | peak power → limit |
-| `test_band_power_dbm.py.design` (reserved) | band power → limit |
+| `test_band_power_dbm.py` | band power → limit |
 
 ## Peak versus average and fresh acquisition
 
@@ -25,4 +25,12 @@ hardware qualification. The average block also starts a new acquisition.
 U2000-series sensors are average-power sensors, not envelope-peak sensors;
 their driver now explicitly refuses peak reads. See the
 [Keysight measurement distinction](https://www.keysight.com/us/en/assets/7018-03996/application-notes/5991-2642.pdf).
-The reserved band-power design is a separate integrated-power requirement.
+The band-power reference uses a spectrum analyzer in native channel-power mode.
+
+## Reference setup
+
+Follow the [copy-out instructions](../../docs/reference_tests.md). This topic uses [reference_common.py](../../reference_common.py), [rf/rf_reference.py](../../rf/rf_reference.py). Fill `SETTINGS` for the selected fixture.
+
+| Procedure | Fixture |
+| --- | --- |
+| [band power dbm](test_band_power_dbm.py) | Preconfigure a supported analyzer in native channel-power mode with the stated integration bandwidth. Verify in-band and out-of-band references. Use a qualified flat path, and keep the mode through a completed acquisition. |

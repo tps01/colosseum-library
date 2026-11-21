@@ -1,4 +1,6 @@
-# Select actual drivers/models/addresses; example values do not qualify a bench.
-# Live setup and required rows: ../../docs/bench_modes.md
-# [equipment.fs740]
-# fs740_id = 1
+# Fill resources and models using the qualified bench layout.
+[equipment.oscope]
+oscope_id = 1
+driver = "visa"
+resource = "FILL_IN_HERE"
+model = "FILL_IN_HERE"

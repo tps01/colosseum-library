@@ -1,13 +1,19 @@
 # Spurs
 
-Max-hold trace; SG smoothing.
-
 ## Building blocks
 
 | Script | Block |
 | --- | --- |
-| `test_spur_max_dbc.py.design` (reserved) | spur dBc → max |
+| `test_spur_max_dbc.py` | spur dBc → max |
 
 ## Bench hookup and prerequisites
 
-Reserved derived method. DUT RF output -> analyzer through the qualified reference-plane correction path; if driven, establish its source frequency/power and DUT mode. Define the band, RBW/detector, observation/max-hold duration, fundamental reference, carrier/harmonic exclusion regions and noise-floor validity. Retain the trace and define whether smoothing may hide a narrow spur before implementing a worst-spur dBc metric.
+Use a calibrated analyzer with a fixed grid, detector and RBW. The procedure retains repeated unsmoothed sweeps and reports the highest included spur relative to a stable carrier.
+
+## Reference setup
+
+Follow the [copy-out instructions](../../docs/reference_tests.md). This topic uses [reference_common.py](../../reference_common.py), [rf/rf_reference.py](../../rf/rf_reference.py). Fill `SETTINGS` for the selected fixture.
+
+| Procedure | Fixture |
+| --- | --- |
+| [spur max dbc](test_spur_max_dbc.py) | Preconfigure the analyzer for repeatable single sweeps with a fixed grid, RBW and detector. Qualify the output path, detector and worst-case detection level. Explicitly exclude the carrier, harmonic and modulation windows. |

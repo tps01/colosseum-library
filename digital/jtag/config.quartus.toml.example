@@ -1,0 +1,11 @@
+# For Agilex 7 use Quartus Pro, and for Cyclone V use Quartus Standard.
+[equipment.jtag]
+jtag_id = 1
+driver = "quartus"
+quartus_path = "FILL_IN_HERE"
+target = "FILL_IN_HERE"
+# device = "@2"
+# ir_bits = 10
+# cfgmem_parts = ["FILL_IN_HERE"]
+# jtag_server = "lab-server.example"
+# jtag_server_password_env = "BENCH_JTAG_PASSWORD"

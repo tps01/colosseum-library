@@ -1,8 +1,7 @@
 # RF
 
 Atomic RF path and amplifier building blocks. Instrument APIs live in
-`colosseum-equipment`. Implemented derived metrics use local copy-out helpers;
-other methods remain [reserved contracts](../docs/measurement_contracts.md).
+`colosseum-equipment`. The derived measurements use [RF helpers](rf_reference.py) and retain the captured trace evidence.
 
 Each topic folder shares `config.toml.example` + `README.md`; each executable script has one primary quantity with supporting evidence as needed.
 
@@ -10,11 +9,10 @@ Each topic folder shares `config.toml.example` + `README.md`; each executable sc
 
 | Plugin | Used for |
 | --- | --- |
-| `colosseum-equipment` | `vsg`, `speca`, `vna`, `pwrmeter`, `fs740` (TDD), `gnss` |
+| `colosseum-equipment` | `vsg`, `speca`, `vna`, `pwrmeter`, `gnss` |
 | `colosseum-shared` | Numeric acceptance, bounds and settling waits |
 
-See [catalog readiness](../docs/target_apis.md) for unavailable capabilities and
-reserved procedure designs.
+See the [measurement contracts](../docs/measurement_contracts.md) for evidence requirements.
 
 ## Catalog (26 building blocks)
 
@@ -43,6 +41,3 @@ reserved procedure designs.
   P1dB, IM3, OIP3
 - [suites/rf_amplifier.toml.design](../suites/rf_amplifier.toml.design) -
   broader RF acceptance
-
-Rows labeled **reserved** refer to `.py.design` procedure proposals, not runnable
-tests. See [catalog readiness](../docs/target_apis.md) before copying a block.

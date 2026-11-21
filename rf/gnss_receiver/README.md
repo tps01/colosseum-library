@@ -13,9 +13,11 @@ repeater. Instrument APIs live in `colosseum-equipment` (`col.equipment.gnss`).
 | `test_hdop.py` | HDOP upper bound (+ track / deviation / sky / quality plots) |
 
 Plots use the equipment GNSS writers (`save_skyplot`, `save_signal_levels_plot`,
-`save_track_plot`, `save_deviation_plot`, `save_quality_plot`). Logging uses
-`messages="default"` (PVT/DOP/GSV). For field/sat multi-row verifies, raise the
-profile to `field`, `sat`, or `all` on `start_logging`.
+`save_track_plot`, `save_deviation_plot`, `save_quality_plot`). Each block
+sets the default receiver message profile (fix, DOP, and sky view) with
+`set_message_profile` before recording. Use the `field`, `sat`, or `all`
+profile for additional evidence if supported by your receiver. Stopping the
+recording leaves the selected profile in effect.
 
 Suite template: [`suites/gnss_receiver.toml.example`](../../suites/gnss_receiver.toml.example)
 (CN0 → sats → TTFF → HDOP).
@@ -26,7 +28,7 @@ Suite template: [`suites/gnss_receiver.toml.example`](../../suites/gnss_receiver
 2. Copy `config.toml.example` → `config.toml`.
 3. Set `port` (e.g. `COM5` for a u-blox M9 USB serial adapter). Leave **`model`
    omitted** so open-time `MON-VER` probing can select `ublox-m9`.
-4. Keep `USE_AUTOCONFIG = False` unless you intentionally use COM autoconfig.
+4. Keep `USE_AUTOCONFIG = False` unless you intentionally enable GNSS serial probing with `autoconfig(gnss=True)`.
 5. Replace every `FILL_IN_HERE` in the scripts you will run.
 
 Suggested first-fill values (tune to the antenna / environment):
@@ -45,8 +47,7 @@ Default baud in the example config is **9600**. If the receiver was moved to
 another baud, edit `config.toml` to match or probing and stream will fail.
 
 `test_ttff_s.py` does **not** cold-start the receiver; it marks acquisition T0
-then waits for fix (warm/hot). `test_hdop.py` exports a config subset via
-`save_config` before logging.
+then waits for fix (warm/hot).
 
 ## Run
 

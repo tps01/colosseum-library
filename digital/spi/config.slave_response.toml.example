@@ -1,0 +1,15 @@
+# Separate Aardvark serial numbers. Set target mode to match SETTINGS["mode"].
+[[io.spi]]
+spi_id = 1
+driver = "totalphase-aardvark"
+resource = "FILL_IN_HERE"
+role = "controller"
+target_power = false
+
+[[io.spi]]
+spi_id = 2
+driver = "totalphase-aardvark"
+resource = "FILL_IN_HERE"
+role = "target"
+mode = 0
+target_power = false
