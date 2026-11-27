@@ -35,7 +35,8 @@ values when both are present.
 ## Run
 
 ```sh
-# After copy-out: fill FILL_IN_HERE; optionally export autoconfig IDs
+# After copy-out: fill FILL_IN_HERE and supply the sibling parameters.toml.
+# Optionally export autoconfig IDs.
 colosseum run test_rail_voltage.py
 colosseum run test_rail_voltage.py --config config.toml
 colosseum run test_rail_voltage.py --config config.toml --parameters parameters.toml

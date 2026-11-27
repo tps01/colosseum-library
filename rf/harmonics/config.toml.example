@@ -3,20 +3,20 @@
 # Live setup and required rows: ../../docs/bench_modes.md
 [equipment.vsg]
 vsg_id = 1
-driver = sim
-resource = SIM::VSG1
+driver = "sim"
+resource = "SIM::VSG1"
 
 [equipment.speca]
 speca_id = 1
-driver = sim
-resource = SIM::SA1
+driver = "sim"
+resource = "SIM::SA1"
 
 [equipment.vna]
 vna_id = 1
-driver = sim
-resource = SIM::VNA1
+driver = "sim"
+resource = "SIM::VNA1"
 
 [equipment.pwrmeter]
 pwrmeter_id = 1
-driver = sim
-resource = SIM::PM1
+driver = "sim"
+resource = "SIM::PM1"

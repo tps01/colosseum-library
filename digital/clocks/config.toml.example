@@ -3,10 +3,10 @@
 # Live setup and required rows: ../../docs/bench_modes.md
 [equipment.oscope]
 oscope_id = 1
-driver = sim
-resource = SIM::SCOPE1
+driver = "sim"
+resource = "SIM::SCOPE1"
 
 [equipment.freqcounter]
 freqcounter_id = 1
-driver = sim
-resource = SIM::FC1
+driver = "sim"
+resource = "SIM::FC1"

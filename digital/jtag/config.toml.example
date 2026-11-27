@@ -1,4 +1,12 @@
-# Select actual drivers/models/addresses; example values do not qualify a bench.
-# Live setup and required rows: ../../docs/bench_modes.md
-# [io.jtag]
-# jtag_id = 1
+# Vivado batch JTAG. Fill target/device if discovery returns more than one.
+[equipment.jtag]
+jtag_id = 1
+driver = "vivado"
+# vivado_path = "FILL_IN_HERE"
+# hw_server_path = "FILL_IN_HERE"
+# hw_server_url = "FILL_IN_HERE"
+# xvc_url = "FILL_IN_HERE"
+# xvc_programming = true
+# target = "FILL_IN_HERE"
+# device = "FILL_IN_HERE"
+# clock_hz = 1000000

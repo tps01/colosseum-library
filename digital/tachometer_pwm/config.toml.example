@@ -9,5 +9,5 @@ password = "changeme"
 
 [equipment.oscope]
 oscope_id = 1
-driver = sim
-resource = SIM::SCOPE1
+driver = "sim"
+resource = "SIM::SCOPE1"

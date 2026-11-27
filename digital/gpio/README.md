@@ -12,8 +12,8 @@ Pin header map; loopback jumper on J_GPIO_LB for loopback script.
 | `test_output_voltage_low.py` | Vlow → maximum |
 | `test_rise_time.py` | rise time → max ns |
 | `test_fall_time.py` | fall time → max ns |
-| `test_common_mode_voltage.py.design` (reserved) | Vcm → limit |
-| `test_differential_voltage.py.design` (reserved) | Vdiff → limit |
+| `test_common_mode_voltage.py` | Vcm → limit |
+| `test_differential_voltage.py` | Vdiff → limit |
 | `test_loopback_pattern.py` | fixture continuity, two low/high cycles -> matching independent readback |
 
 ## Static driven-interface voltage
@@ -75,3 +75,12 @@ The DIO-driven DC voltage blocks own only their selected fixture pin and release
 it to input in `finally`, including after a DMM error. The DUT supply remains
 externally owned. Release means high impedance, not a guaranteed low voltage;
 provide the pull-up/down required for the safe idle state.
+
+## Reference setup
+
+Follow the [copy-out instructions](../../docs/reference_tests.md). This topic uses [reference_common.py](../../reference_common.py), [digital/waveform_reference.py](../../digital/waveform_reference.py). Fill `SETTINGS` for the selected fixture.
+
+| Procedure | Fixture |
+| --- | --- |
+| [common mode voltage](test_common_mode_voltage.py) | Use qualified isolated probes for Vp and Vn on the same timebase. Select a settled DC window. |
+| [differential voltage](test_differential_voltage.py) | Use qualified isolated probes for Vp and Vn on the same timebase. Select a settled DC window. |

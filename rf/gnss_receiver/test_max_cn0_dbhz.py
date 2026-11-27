@@ -35,14 +35,15 @@ def _load_bench() -> None:
     if col.config.is_loaded():
         return
     if USE_AUTOCONFIG:
-        col.equipment.autoconfig()
+        col.equipment.autoconfig(gnss=True)
         return
     col.config.load_config(str(Path(__file__).with_name("config.toml")))
 
 
 def main() -> None:
     _load_bench()
-    col.equipment.gnss.start_logging(gnss_id=gnss_id, path="gnss/max_cn0.nmea", key="max_cn0", messages="default")
+    col.equipment.gnss.set_message_profile(gnss_id=gnss_id, messages="default")
+    col.equipment.gnss.start_logging(gnss_id=gnss_id, path="gnss/max_cn0.nmea", key="max_cn0")
     try:
         col.shared.wait(duration=soak_s)
         col.equipment.gnss.get_constellations_present(gnss_id=gnss_id)

@@ -3,15 +3,15 @@
 # Live setup and required rows: ../../docs/bench_modes.md
 [[equipment.vsg]]
 vsg_id = 1
-driver = sim
-resource = SIM::VSG1
+driver = "sim"
+resource = "SIM::VSG1"
 
 [[equipment.vsg]]
 vsg_id = 2
-driver = sim
-resource = SIM::VSG2
+driver = "sim"
+resource = "SIM::VSG2"
 
 [equipment.speca]
 speca_id = 1
-driver = sim
-resource = SIM::SA1
+driver = "sim"
+resource = "SIM::SA1"

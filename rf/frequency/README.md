@@ -1,18 +1,49 @@
 # RF frequency
 
-Wideband scripts need trace save + SG smoothing.
-
 ## Building blocks
 
 | Script | Block |
 | --- | --- |
 | `test_peak_frequency.py` | CW peak freq → expected |
-| `test_center_frequency.py.design` (reserved) | wideband CF → expected |
-| `test_occupied_bandwidth.py.design` (reserved) | OBW → max Hz |
+| `test_center_frequency.py` | Midpoint of the dominant signal's half-power crossings, in Hz |
+| `test_occupied_bandwidth.py` | Width containing 99% of integrated power with 0.5% in each tail, in Hz |
 
 ## Bench hookup and prerequisites
 
-Plugins: Equipment + Shared. VSG RF OUT -> DUT IN; DUT OUT -> analyzer RF IN through the qualified attenuator/DC block where required. Power/enable the DUT before RF. Set generator-port power with known input-path loss, and receiver span/RBW/VBW/attenuation/reference level for the intended carrier. Reference-lock instruments where required by the frequency uncertainty budget. The peak-frequency block requires carrier power above its presence threshold; it is not an oscillator-startup test. Wideband center/OBW designs need separate analysis definitions.
+For CW peak frequency, connect VSG RF OUT to DUT IN and DUT OUT to analyzer RF
+IN through a qualified attenuator/DC block where required. Power and enable the
+DUT before RF. Set generator-port power with known input-path loss, and set the
+analyzer span, RBW, VBW, attenuation and reference level for the intended carrier.
+The procedure checks carrier power before verifying peak frequency.
+
+## Wideband setup
+
+Copy the topic folder including `wideband_trace.py`. Use Equipment 0.20 and
+Shared 0.9 or compatible later versions. Only the `equipment.speca` row is
+needed for either wideband block. Set the live driver, model and address for
+your analyzer, then prepare a stable modulated signal from the DUT or an
+external source. Establish a flat response over the analysis band from the
+DUT output reference plane to the analyzer input. Reference-lock instruments
+when required by the uncertainty budget.
+
+Choose a sweep and analysis window that cover the entire signal plus quiet
+guard bands on both sides. Fill the sweep point count, RBW/VBW and detector for
+the signal and analyzer model. Use a detector qualified for power measurements,
+with constant effective RBW and no trace averaging. Set attenuation and
+reference level to avoid overload, and choose the minimum peak and maximum
+guard levels at the analyzer input using a qualified reference capture.
+Integrated power uses the measured noise floor without subtraction. Qualify the
+noise contribution, frequency accuracy and coverage before choosing limits.
+
+Each block presets the analyzer, takes one completed sweep, and saves the
+unsmoothed CSV and an annotated plot. The plot evidence includes both edge
+frequencies. Keep artifacts enabled. Both blocks leave stimulus control and
+shutdown to the fixture.
+
+```sh
+colosseum run test_center_frequency.py --config config.toml
+colosseum run test_occupied_bandwidth.py --config config.toml
+```
 
 ## RF output ownership
 

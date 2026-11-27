@@ -1,6 +1,6 @@
 # Colosseum Library
 
-Reusable **copy-out test procedures and reserved designs** for Colosseum benches. This is
+Reusable **copy-out test procedures** for Colosseum benches. This is
 testware, not a `col.*` plugin: there is no installable package and no
 `colosseum.plugins` entry point. Tests call first-party plugins
 (`col.equipment`, `col.io`, `col.host`, `col.shared`, …) after you copy a folder
@@ -33,7 +33,7 @@ config TOML examples.
 3. Read the topic's **Bench hookup and prerequisites** (or equivalent connection
    section), connect DUT signal/power/return paths, and establish DUT mode,
    calibration and external services. Configure instrument communication:
-   - **Autoconfig** (VISA gear): leave `USE_AUTOCONFIG = True`, or call
+   - **Autoconfig** (discoverable equipment): leave `USE_AUTOCONFIG = True`, or call
      `col.equipment.autoconfig(export_path="config.toml")` once and copy IDs into
      the script.
    - **TOML**: copy `config.toml.example` → `config.toml`, set resources, set
@@ -62,9 +62,9 @@ cannot silently measure the wrong thing.
 | Path | Purpose |
 | --- | --- |
 | `_template/` | Copy this when adding a new catalog test |
-| `docs/target_apis.md` | Executable/reserved procedure readiness |
-| `digital/` | 32 atomic blocks (GPIO, buses, clocks, ethernet, fan/PWM) |
-| `rf/` | 22 atomic RF blocks (VNA, SA, pwrmeter, trace analysis) |
+| `docs/target_apis.md` | Catalog readiness and suite status |
+| `digital/` | 31 atomic blocks (GPIO, buses, clocks, Ethernet, fan/PWM) |
+| `rf/` | 26 atomic RF blocks (VNA, SA, pwrmeter, GNSS, trace analysis) |
 | `power/` | 6 atomic blocks (rail, transient, eload) |
 | `host/` | Bench-PC prerequisites and telemetry |
 | `gui/` | Product UI automation (`col.gui.web` / `col.gui.desktop`) |
@@ -73,15 +73,16 @@ cannot silently measure the wrong thing.
 | `tools/windows/` | PowerShell and batch release download and install helpers |
 | `tools/linux/` | Bash release download and install helpers |
 
-Executable templates use `.py`; procedures needing unavailable APIs use
-`.py.design` and are not runnable. See [catalog readiness](docs/target_apis.md)
-for the complete missing-capability list. There are 39 executable templates and
-29 reserved procedure designs at this checkpoint. API compatibility does not
-establish bench readiness.
+The catalog has 71 executable reference templates. See
+[catalog readiness](docs/target_apis.md) and each topic for plugin and fixture requirements.
 
-Each **topic folder** is self-contained: shared `config.toml.example`,
+Bench-driven topics provide a `config.toml.example`,
 `README.md` (block index), and one `test_<measure>.py` per building block (one
 measurement + one verify). Copy a topic folder or chain blocks via suite TOML.
+For entries with a **Reference setup** section, follow the
+[reference copy-out instructions](docs/reference_tests.md) for the files listed
+in that topic. Fill the bench settings and calibrate the live fixture before
+using the results for acceptance.
 
 ## Release helper scripts
 
@@ -91,12 +92,13 @@ Use `tools/windows/` on Windows or `tools/linux/` on Linux. The download scripts
 
 | Layer | What changes | How to fill |
 | --- | --- | --- |
-| Instruments | VISA resources, models, IDs | `col.equipment.autoconfig(...)` |
+| Instruments | VISA or supported serial resources, models, IDs | `col.equipment.autoconfig(...)` |
 | Procedure | Frequencies, pins, limits | `FILL_IN_HERE` in the Python file |
 | Limit kwargs (optional) | `expected_val`, tolerances by `key=` | sibling / suite / CLI parameters TOML |
 
-Autoconfig today discovers VISA instruments only. DIO, serial, SSH, host
-profile, and DUT endpoints still need TOML or script parameters. After
+Autoconfig scans VISA resources and supported serial equipment. GNSS vendor
+probing is opt-in. DIO, SSH, host profiles and other DUT endpoints still need
+TOML or script parameters. After
 autoconfig, assign instrument IDs from the log or an exported TOML
 (`export_path=...`).
 
@@ -106,8 +108,8 @@ suite that shared `setup` / `--config`.
 ## Suites
 
 Copy a `suites/*.toml.example` together with the test folders it references.
-Paths in suite TOML are relative to the suite file. See
-[suites/README.md](suites/README.md).
+Paths in suite TOML are relative to the suite file. See the
+[bench setup diagrams](docs/bench_setups.md) and [suite instructions](suites/README.md).
 
 ## Adding a test
 
@@ -132,13 +134,11 @@ not a reason to discard the carrier-presence checks needed to validate IM3.
 
 ## Plugin dependencies by domain
 
-See each domain `README.md` and [docs/target_apis.md](docs/target_apis.md). Reserved `.py.design` files refer to proposed capabilities that are not
-implemented. They are excluded from executable suite templates; promote them
-only after the method and prerequisites are defined and implemented.
+See each domain `README.md` and [catalog readiness](docs/target_apis.md).
 
 - **digital** - `colosseum-equipment`, `colosseum-shared`, `colosseum-host`,
   `colosseum-messaging`
-- **rf** - `colosseum-equipment`, `colosseum-shared` (trace analysis TDD)
+- **rf** - `colosseum-equipment`, `colosseum-shared`
 - **power** - `colosseum-equipment`, `colosseum-shared`
 - **host** - `colosseum-host`
 - **gui** - `colosseum-gui` (includes web + desktop drivers)
@@ -174,10 +174,6 @@ select a live driver. Each block states whether it owns stimulus or requires
 externally prepared DUT/fixture state. Owned outputs are released in `finally`;
 VNA RF output remains explicitly fixture-owned because no public disable API is
 available. See topic prerequisites and [suite state contracts](suites/README.md).
-
-The 29 reserved slots have [precise measurement contracts](docs/measurement_contracts.md),
-with the old speculative implementations removed. They still require supported
-acquisition/transport implementations and qualification before promotion.
 
 The historical `scripts/scaffold_catalog.py` was retired because importing or
 running it overwrote corrected procedures with obsolete generated code. Add or

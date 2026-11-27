@@ -1,13 +1,19 @@
 # Gain flatness
 
-Sweep with optional SG on power series.
-
 ## Building blocks
 
 | Script | Block |
 | --- | --- |
-| `test_gain_flatness_db.py.design` (reserved) | Gmax-Gmin → max dB |
+| `test_gain_flatness_db.py` | Gmax-Gmin → max dB |
 
 ## Bench hookup and prerequisites
 
-Reserved derived method. VSG RF OUT -> DUT IN, DUT OUT -> analyzer, using reference-plane cable/attenuator correction over the entire band. Hold delivered input power constant (or measure/correct it), establish frequency sweep/settling and verify source/receiver linearity. Gain is corrected output minus corrected input in dB; flatness is max minus min of that gain series. Define missing-sample and optional smoothing behavior before promotion.
+Use a calibrated VNA S21 log-magnitude sweep at the DUT reference planes. Establish linear DUT operation, and keep the declared passband inside the calibrated sweep.
+
+## Reference setup
+
+Follow the [copy-out instructions](../../docs/reference_tests.md). This topic uses [reference_common.py](../../reference_common.py), [rf/rf_reference.py](../../rf/rf_reference.py). Fill `SETTINGS` for the selected fixture.
+
+| Procedure | Fixture |
+| --- | --- |
+| [gain flatness db](test_gain_flatness_db.py) | Use a calibrated, linear VNA S21 fixture. Bench owns VNA stimulus. Preconfigure sweep, IFBW, point count, source level and calibration. |
